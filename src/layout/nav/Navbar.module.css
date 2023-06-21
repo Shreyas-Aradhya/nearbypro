@@ -1,0 +1,133 @@
+.navbar {
+  width: 100%;
+  background: #f9f6f5;
+  padding: 20px 0px;
+  position: relative;
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo-container {
+  width: 180px;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+
+.nav-list {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  list-style: none;
+}
+
+.nav-item {
+  margin: 0px 40px;
+}
+
+.nav-item:first-child {
+  margin-left: 0px;
+  font-size: 2rem;
+  text-decoration: underline;
+  font-family: "Nunito sans";
+  font-weight: 600;
+}
+
+.nav-item:last-child {
+  margin-right: 0px;
+  font-size: 1.5rem;
+  font-weight: 300;
+}
+
+.nav-btn {
+  display: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 9px;
+  border: none;
+  box-shadow: 0 0 5px 0px #cbcbcb;
+  position: relative;
+  transition: all 0.5s ease;
+}
+
+.nav-btn::after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  content: "";
+  background-image: url(/public/icons/menu-icon.svg);
+  background-size: contain;
+  width: 20px;
+  height: 20px;
+}
+
+.nav-btn.active::after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  content: "";
+  background-image: url(/public/icons/close-icon.svg);
+  background-size: contain;
+  width: 20px;
+  height: 20px;
+}
+
+.nav-group-mobile {
+  display: none;
+  transform: scale(0);
+  transform-origin: 0 0;
+  position: absolute;
+  top: 100%;
+  right: -100%;
+  transition: all 0.3s ease-in;
+}
+
+.nav-group-mobile.show {
+  transform: scale(1);
+  right: 0px;
+}
+
+@media (max-width: 767px) {
+  .nav-group {
+    display: none;
+  }
+  .nav-btn {
+    display: block;
+  }
+  .nav-group-mobile {
+    display: block;
+  }
+  .nav-group-mobile .nav-list {
+    display: block;
+    background-color: #f9f6f5;
+    padding: 10px;
+    min-width: 200px;
+    height: 100vh;
+  }
+  .nav-item {
+    margin: 0px 0px;
+    padding: 10px 0px;
+    border-bottom: 1px solid #ff9324;
+  }
+
+  .nav-item:first-child {
+    margin-left: 0px;
+    font-size: 1rem;
+    text-decoration: none;
+    font-family: "Poppins";
+    font-weight: 500;
+  }
+
+  .nav-item:last-child {
+    margin-right: 0px;
+    font-size: 1rem;
+    font-weight: 500;
+    border-bottom: none;
+  }
+}
