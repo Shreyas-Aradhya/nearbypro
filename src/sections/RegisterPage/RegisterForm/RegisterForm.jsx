@@ -190,7 +190,8 @@ const RegisterForm = () => {
                     }
                   />
                   <FormControlLabel
-                    value="male"
+                    value="agency"
+                    sx={{ mb: 3 }}
                     control={
                       <Radio
                         sx={{
@@ -209,7 +210,8 @@ const RegisterForm = () => {
                     }
                   />
                   <FormControlLabel
-                    value="other"
+                    value="business"
+                    sx={{ mb: 3 }}
                     control={
                       <Radio
                         sx={{
