@@ -1,5 +1,7 @@
 import styles from "./RegisterForm.module.css";
 import profileImg from "/img/profile-icon.png";
+import infoIcon from "/img/info-icon.png";
+import searchIcon from "/icons/search-icon.svg";
 
 // mui
 import Box from "@mui/material/Box";
@@ -19,6 +21,9 @@ import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControl from "@mui/material/FormControl";
 
+import Chip from "@mui/material/Chip";
+import Autocomplete from "@mui/material/Autocomplete";
+
 const textfieldStyles = {
   "& .MuiOutlinedInput-notchedOutline": {
     "&.Mui-focused": {
@@ -27,6 +32,16 @@ const textfieldStyles = {
     borderColor: "#077BC1",
   },
 };
+
+const businesses = [
+  { label: "Bakery", year: 1994 },
+  { label: "Electrician", year: 1972 },
+  { label: "Restaurant: Part II", year: 1974 },
+  { label: "Cafe", year: 2008 },
+  { label: "Co-working space", year: 1957 },
+  { label: "Clinic", year: 1993 },
+  { label: "Grocery shop", year: 1994 },
+];
 
 const CountryCode = () => {
   return (
@@ -41,7 +56,19 @@ const CountryCode = () => {
   );
 };
 
+const getSearchParams = (props) => {
+  props.InputProps.startAdornment = (
+    <InputAdornment position="start">
+      <img width="30" src={searchIcon} alt="search icon" />
+    </InputAdornment>
+  );
+  return props;
+};
+
 const RegisterForm = () => {
+  const handleDelete = () => {
+    console.info("You clicked the delete icon.");
+  };
   return (
     <Card
       sx={{
@@ -163,7 +190,7 @@ const RegisterForm = () => {
               Business Service Details
             </h2>
             <div className={styles["form-group"]}>
-              <FormControl>
+              <FormControl sx={{ mb: 2 }}>
                 <RadioGroup
                   aria-labelledby="demo-radio-buttons-group-label"
                   defaultValue="female"
@@ -231,6 +258,58 @@ const RegisterForm = () => {
                   />
                 </RadioGroup>
               </FormControl>
+
+              <h3 className={styles["group-sub-heading"]}>
+                My Business Skills
+              </h3>
+              <Stack direction="row" spacing={1} sx={{ mb: 3 }}>
+                <Chip
+                  label="Geyser Repair Service"
+                  variant="outlined"
+                  onDelete={handleDelete}
+                />
+                <Chip
+                  label="Plumber"
+                  variant="outlined"
+                  onDelete={handleDelete}
+                />
+                <Chip
+                  label="Plumber"
+                  variant="outlined"
+                  onDelete={handleDelete}
+                />
+              </Stack>
+              <Stack spacing={1} sx={{ mb: 3 }}>
+                <label htmlFor="name">Search To Select Your Skills</label>
+                <Stack direction={{ xs: "column", md: "row" }} spacing={2}>
+                  <Autocomplete
+                    sx={{ flex: "1" }}
+                    disablePortal
+                    id="combo-box-demo"
+                    options={businesses}
+                    renderInput={(params) => (
+                      <TextField
+                        sx={{ ...textfieldStyles }}
+                        fullWidth
+                        variant="outlined"
+                        {...getSearchParams(params)}
+                      />
+                    )}
+                  />
+                  <Button variant="contained">Add +</Button>
+                </Stack>
+              </Stack>
+              <div className={styles["info-box"]}>
+                <img
+                  className={styles["info-icon"]}
+                  src={infoIcon}
+                  alt="info icon"
+                />
+                <p className="info-txt">
+                  For Ex. If you are an "Plumber", type "plu" and select
+                  "Plumber" from the list.
+                </p>
+              </div>
             </div>
           </div>
 
