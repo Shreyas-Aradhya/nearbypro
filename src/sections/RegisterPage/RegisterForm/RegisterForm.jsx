@@ -1,7 +1,10 @@
 import styles from "./RegisterForm.module.css";
 import profileImg from "/img/profile-icon.png";
 import infoIcon from "/img/info-icon.png";
+import uploadIcon from "/img/upload-icon.png";
 import searchIcon from "/icons/search-icon.svg";
+
+import { useState } from "react";
 
 // mui
 import Box from "@mui/material/Box";
@@ -65,10 +68,31 @@ const getSearchParams = (props) => {
   return props;
 };
 
+const FileInput = ({ index, handleImgUpload }) => {
+  return (
+    <label className={styles["file-input-container"]}>
+      <input
+        type="file"
+        name="custom-file-input"
+        id="custom-file-input"
+        onChange={(e) => handleImgUpload(e.target.files[0])}
+        className={styles["custom-file-input"]}
+      />
+      <img src={uploadIcon} alt="upload button icon" width={20} />
+    </label>
+  );
+};
+
 const RegisterForm = () => {
   const handleDelete = () => {
     console.info("You clicked the delete icon.");
   };
+
+  const [files, setFiles] = useState([]);
+  const handleImgUpload = (data) => {
+    setFiles((prev) => [...prev, data]);
+  };
+
   return (
     <Card
       sx={{
@@ -322,6 +346,27 @@ const RegisterForm = () => {
               About Your Business
             </h2>
             <div className={styles["form-group"]}>
+              <label>Upload images of your work or business</label>
+              <Stack
+                direction={"row"}
+                sx={{ mt: 2, mb: 3, flexWrap: "wrap", gap: 2 }}
+              >
+                {files.map((file, index) => (
+                  <Box
+                    key={index}
+                    component="img"
+                    sx={{
+                      height: 130,
+                      width: 130,
+                      boxShadow: "0px 0px 6px #00000029",
+                      borderRadius: "8px",
+                    }}
+                    alt="uploaded img"
+                    src={URL.createObjectURL(file)}
+                  />
+                ))}
+                <FileInput handleImgUpload={handleImgUpload} />
+              </Stack>
               <Stack spacing={1} sx={{ mb: 3 }}>
                 <label htmlFor="name">Write About Your Business</label>
                 <TextField
