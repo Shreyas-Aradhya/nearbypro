@@ -286,7 +286,11 @@ const RegisterForm = () => {
               <h3 className={styles["group-sub-heading"]}>
                 My Business Skills
               </h3>
-              <Stack direction="row" spacing={1} sx={{ mb: 3 }}>
+              <Stack
+                direction="row"
+                spacing={1}
+                sx={{ mb: 3, flexWrap: "wrap", gap: 1 }}
+              >
                 <Chip
                   label="Geyser Repair Service"
                   variant="outlined"
