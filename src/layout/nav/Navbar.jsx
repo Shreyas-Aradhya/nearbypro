@@ -1,26 +1,40 @@
 import styles from "./Navbar.module.css";
 import nearbyLogo from "/img/nearby-pro-logo.png";
+// hooks
+import useAuth from "../../hooks/useAuth";
 
 import { useState } from "react";
 
+import Button from "../../components/Button/Button";
+import { NavLink } from "react-router-dom";
+
 const Navbar = () => {
   const [buttonActive, setButtonActive] = useState(false);
+  const { isAuthenticated, logout } = useAuth();
   return (
     <nav className={styles.navbar}>
       <div className="container">
         <div className={styles["nav-container"]}>
           <div className={styles["logo-container"]}>
-            <a href="/">
+            <NavLink to="/">
               <img src={nearbyLogo} alt="nearby-pro logo" />
-            </a>
+            </NavLink>
           </div>
           <div className={styles["nav-group"]}>
             <ul className={styles["nav-list"]}>
               <li className={styles["nav-item"]}>
-                <a href="/register">Free Listing</a>
+                {!isAuthenticated ? (
+                  <NavLink to="/register">Free Listing</NavLink>
+                ) : (
+                  <NavLink to="/profile">Profile</NavLink>
+                )}
               </li>
               <li className={styles["nav-item"]}>
-                <a href="/signin">Login/Register</a>
+                {!isAuthenticated ? (
+                  <NavLink to="/signin">Login/Register</NavLink>
+                ) : (
+                  <Button onClick={logout}>Logout</Button>
+                )}
               </li>
             </ul>
           </div>
@@ -36,8 +50,20 @@ const Navbar = () => {
             }`}
           >
             <ul className={styles["nav-list"]}>
-              <li className={styles["nav-item"]}>Free Listing</li>
-              <li className={styles["nav-item"]}>Login/Register</li>
+              <li className={styles["nav-item"]}>
+                {!isAuthenticated ? (
+                  <NavLink to="/register">Free Listing</NavLink>
+                ) : (
+                  <NavLink to="/profile">Profile</NavLink>
+                )}
+              </li>
+              <li className={styles["nav-item"]}>
+                {!isAuthenticated ? (
+                  <NavLink to="/signin">Login/Register</NavLink>
+                ) : (
+                  <button onClick={logout}>Logout</button>
+                )}
+              </li>
             </ul>
           </div>
         </div>

@@ -125,10 +125,14 @@
     font-weight: 500;
   }
 
+  .nav-item:last-child button,
   .nav-item:last-child {
     margin-right: 0px;
     font-size: 1rem;
     font-weight: 500;
     border-bottom: none;
+  }
+  .nav-item:last-child button {
+    border: none;
   }
 }

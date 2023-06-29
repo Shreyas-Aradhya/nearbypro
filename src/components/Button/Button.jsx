@@ -9,7 +9,7 @@ const getClassName = (key) => {
     case "profile":
       return "btn-profile";
     default:
-      break;
+      return "btn-primary";
   }
 };
 const Button = ({ children, variant, ...others }) => {

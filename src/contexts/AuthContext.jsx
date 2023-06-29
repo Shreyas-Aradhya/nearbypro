@@ -1,0 +1,187 @@
+import { createContext, useEffect, useReducer } from "react";
+
+import axios from "../utils/axios";
+import { isValidToken, setSession } from "../utils/auth";
+
+const initialState = {
+  isAuthenticated: false,
+  isInitialized: false,
+  user: null,
+  vendor: null,
+};
+
+const handlers = {
+  INITIALIZE: (state, action) => {
+    const { isAuthenticated, user, vendor } = action.payload;
+    return {
+      ...state,
+      isAuthenticated,
+      isInitialized: true,
+      user,
+      vendor,
+    };
+  },
+  LOGIN: (state, action) => {
+    const { user, vendor } = action.payload;
+    return {
+      ...state,
+      isAuthenticated: true,
+      isInitialized: true,
+      user,
+      vendor,
+    };
+  },
+  LOGOUT: (state) => ({
+    ...state,
+    isAuthenticated: false,
+    isInitialized: false,
+    user: null,
+    vendor: null,
+  }),
+};
+
+const reducer = (state, action) =>
+  handlers[action.type] ? handlers[action.type](state, action) : state;
+
+const AuthContext = createContext({
+  ...initialState,
+  method: "jwt",
+  login: () => Promise.resolve(),
+  logout: () => Promise.resolve(),
+});
+
+function AuthProvider({ children }) {
+  const [state, dispatch] = useReducer(reducer, initialState);
+
+  useEffect(() => {
+    const initialize = async () => {
+      try {
+        const accessToken = localStorage.getItem("accessToken");
+
+        if (accessToken && isValidToken(accessToken)) {
+          const response = await axios.get(`/users/getProfile`, {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+          });
+          const { user, vendor } = response.data;
+          console.log(user, vendor);
+          setSession(accessToken);
+
+          dispatch({
+            type: "INITIALIZE",
+            payload: {
+              isAuthenticated: true,
+              user,
+              vendor,
+            },
+          });
+        } else {
+          dispatch({
+            type: "INITIALIZE",
+            payload: {
+              isAuthenticated: false,
+              user: null,
+              vendor: null,
+            },
+          });
+        }
+      } catch (error) {
+        console.log(error);
+        dispatch({
+          type: "INITIALIZE",
+          payload: {
+            isAuthenticated: false,
+            user: null,
+            vendor: null,
+          },
+        });
+      }
+    };
+
+    initialize();
+  }, []);
+
+  const requestOtp = async (mobilenumber) => {
+    try {
+      let data = JSON.stringify({
+        mobilenumber: mobilenumber,
+      });
+
+      let config = {
+        method: "post",
+        maxBodyLength: Infinity,
+        url: "/users/sendOtp",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        data: data,
+      };
+
+      const response = await axios.request(config);
+      const { message, otp } = response.data;
+      console.log(message);
+      return otp;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const verifyOtp = async (otp, mobilenumber) => {
+    try {
+      let data = JSON.stringify({
+        otp: otp,
+        mobilenumber: mobilenumber,
+      });
+
+      let config = {
+        method: "post",
+        maxBodyLength: Infinity,
+        url: "/users/verifyOtp",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        data: data,
+      };
+      const response = await axios.request(config);
+      const { message, access_token, user, vendor } = response.data;
+      console.log(message);
+      setSession(access_token);
+      dispatch({
+        type: "LOGIN",
+        payload: {
+          isAuthenticated: true,
+          user,
+          vendor,
+        },
+      });
+    } catch (error) {
+      console.log(error);
+      dispatch({
+        type: "INITIALIZE",
+        payload: {
+          isAuthenticated: false,
+          user: null,
+          vendor: null,
+        },
+      });
+    }
+  };
+
+  const logout = () => {
+    setSession(null);
+    dispatch({
+      type: "LOGOUT",
+    });
+  };
+
+  return (
+    <AuthContext.Provider
+      value={{ ...state, method: "jwt", requestOtp, verifyOtp, logout }}
+    >
+      {children}
+    </AuthContext.Provider>
+  );
+}
+
+export { AuthContext, AuthProvider };

@@ -1,10 +1,15 @@
 import styles from "./SigninForm.module.css";
 import indiaFlag from "/img/india-flag-icon.png";
+// react
+import { useContext, useState } from "react";
 // mui
 import TextField from "@mui/material/TextField";
 import Stack from "@mui/material/Stack";
 import InputAdornment from "@mui/material/InputAdornment";
 import Button from "@mui/material/Button";
+// context
+import { AuthContext } from "../../../contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const textfieldStyles = {
   "& .MuiOutlinedInput-notchedOutline": {
@@ -29,9 +34,37 @@ const CountryCode = () => {
 };
 
 const SigninForm = () => {
+  const [mobileNumber, setMobileNumber] = useState("");
+  const [otpSent, setOtpSent] = useState(false);
+  const [otp, setOtp] = useState("");
+
+  const navigate = useNavigate();
+
+  const { requestOtp, verifyOtp } = useContext(AuthContext);
+
+  const handleRequestOtp = async () => {
+    try {
+      const otp = await requestOtp(mobileNumber);
+      setOtpSent(true);
+      setOtp(otp);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      await verifyOtp(otp, mobileNumber);
+      navigate("/profile");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className={styles["form-container"]}>
-      <form className={styles["signin-form"]}>
+      <form className={styles["signin-form"]} onSubmit={handleLogin}>
         <Stack spacing={1} sx={{ mb: 3 }}>
           <label htmlFor="mobile-number">Mobile Number</label>
           <TextField
@@ -46,30 +79,45 @@ const SigninForm = () => {
                 </InputAdornment>
               ),
             }}
+            value={mobileNumber}
+            onChange={(e) => setMobileNumber(e.target.value)}
           />
         </Stack>
-        <Stack spacing={1} sx={{ mb: 3 }}>
-          <label htmlFor="otp">Enter OTP</label>
-          <TextField
-            id="otp"
-            sx={{ ...textfieldStyles }}
-            variant="outlined"
-            size="small"
-            type="password"
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <p>Resend (45sec)</p>
-                </InputAdornment>
-              ),
-            }}
-          />
-        </Stack>
-        <Stack>
-          <Button variant="contained" type="submit">
-            SIGN IN
-          </Button>
-        </Stack>
+        {!otpSent && (
+          <Stack>
+            <Button variant="contained" onClick={handleRequestOtp}>
+              Request OTP
+            </Button>
+          </Stack>
+        )}
+        {otpSent && (
+          <>
+            <Stack spacing={1} sx={{ mb: 3 }}>
+              <label htmlFor="otp">Enter OTP</label>
+              <TextField
+                id="otp"
+                sx={{ ...textfieldStyles }}
+                variant="outlined"
+                size="small"
+                type="password"
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <p>Resend (45sec)</p>
+                    </InputAdornment>
+                  ),
+                }}
+                value={otp}
+                onChange={(e) => setOtp(e.target.value)}
+              />
+            </Stack>
+            <Stack>
+              <Button variant="contained" type="submit">
+                SIGN IN
+              </Button>
+            </Stack>
+          </>
+        )}
       </form>
     </div>
   );
