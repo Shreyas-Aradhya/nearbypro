@@ -23,12 +23,13 @@ const Navbar = () => {
           <div className={styles["nav-group"]}>
             <ul className={styles["nav-list"]}>
               <li className={styles["nav-item"]}>
-                {!isAuthenticated ? (
-                  <NavLink to="/register">Free Listing</NavLink>
-                ) : (
-                  <NavLink to="/profile">Profile</NavLink>
-                )}
+                <NavLink to="/">Home</NavLink>
               </li>
+              {isAuthenticated && (
+                <li className={styles["nav-item"]}>
+                  <NavLink to="/profile">Profile</NavLink>
+                </li>
+              )}
               <li className={styles["nav-item"]}>
                 {!isAuthenticated ? (
                   <NavLink to="/signin">Login/Register</NavLink>
@@ -51,12 +52,13 @@ const Navbar = () => {
           >
             <ul className={styles["nav-list"]}>
               <li className={styles["nav-item"]}>
-                {!isAuthenticated ? (
-                  <NavLink to="/register">Free Listing</NavLink>
-                ) : (
-                  <NavLink to="/profile">Profile</NavLink>
-                )}
+                <NavLink to="/">Home</NavLink>
               </li>
+              {isAuthenticated && (
+                <li className={styles["nav-item"]}>
+                  <NavLink to="/profile">Profile</NavLink>
+                </li>
+              )}
               <li className={styles["nav-item"]}>
                 {!isAuthenticated ? (
                   <NavLink to="/signin">Login/Register</NavLink>

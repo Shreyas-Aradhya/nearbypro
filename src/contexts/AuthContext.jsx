@@ -38,6 +38,20 @@ const handlers = {
     user: null,
     vendor: null,
   }),
+  UPDATE_PROFILE: (state, action) => {
+    const { user } = action.payload;
+    return {
+      ...state,
+      user,
+    };
+  },
+  UPDATE_VENDOR: (state, action) => {
+    const { vendor } = action.payload;
+    return {
+      ...state,
+      vendor,
+    };
+  },
 };
 
 const reducer = (state, action) =>
@@ -65,7 +79,6 @@ function AuthProvider({ children }) {
             },
           });
           const { user, vendor } = response.data;
-          console.log(user, vendor);
           setSession(accessToken);
 
           dispatch({
@@ -123,7 +136,7 @@ function AuthProvider({ children }) {
       console.log(message);
       return otp;
     } catch (error) {
-      console.log(error);
+      throw new Error(error);
     }
   };
 
@@ -175,9 +188,79 @@ function AuthProvider({ children }) {
     });
   };
 
+  const updateProfile = async (profileData) => {
+    try {
+      const accessToken = localStorage.getItem("accessToken");
+
+      if (accessToken && isValidToken(accessToken)) {
+        let data = JSON.stringify(profileData);
+
+        let config = {
+          method: "post",
+          maxBodyLength: Infinity,
+          url: "/users/register",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          data: data,
+        };
+        const response = await axios.request(config);
+        const { user } = response.data;
+
+        dispatch({
+          type: "UPDATE_PROFILE",
+          payload: {
+            user,
+          },
+        });
+      }
+    } catch (error) {
+      throw new Error(error);
+    }
+  };
+
+  const updateBusiness = async (businessData) => {
+    try {
+      const accessToken = localStorage.getItem("accessToken");
+
+      if (accessToken && isValidToken(accessToken)) {
+        let data = JSON.stringify(businessData);
+
+        let config = {
+          method: "post",
+          maxBodyLength: Infinity,
+          url: "/vendor/register",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          data: data,
+        };
+        const response = await axios.request(config);
+        const { vendor } = response.data;
+
+        dispatch({
+          type: "UPDATE_VENDOR",
+          payload: {
+            vendor,
+          },
+        });
+      }
+    } catch (error) {
+      throw new Error(error);
+    }
+  };
+
   return (
     <AuthContext.Provider
-      value={{ ...state, method: "jwt", requestOtp, verifyOtp, logout }}
+      value={{
+        ...state,
+        method: "jwt",
+        requestOtp,
+        verifyOtp,
+        logout,
+        updateProfile,
+        updateBusiness,
+      }}
     >
       {children}
     </AuthContext.Provider>

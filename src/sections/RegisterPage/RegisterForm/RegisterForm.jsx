@@ -1,24 +1,20 @@
 import styles from "./RegisterForm.module.css";
-import profileImg from "/img/profile-icon.png";
 import infoIcon from "/img/info-icon.png";
 import uploadIcon from "/img/upload-icon.png";
 import searchIcon from "/icons/search-icon.svg";
 
-import { useState } from "react";
+import { useState, useEffect, useContext } from "react";
 
 // mui
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
-import indiaFlag from "/img/india-flag-icon.png";
-// mui
+
 import TextField from "@mui/material/TextField";
 import Stack from "@mui/material/Stack";
 import InputAdornment from "@mui/material/InputAdornment";
 import Button from "@mui/material/Button";
 
-import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
@@ -26,6 +22,12 @@ import FormControl from "@mui/material/FormControl";
 
 import Chip from "@mui/material/Chip";
 import Autocomplete from "@mui/material/Autocomplete";
+
+import CircularProgress from "@mui/material/CircularProgress";
+
+import { AuthContext } from "../../../contexts/AuthContext";
+import s3ImageUpload from "../../../services/s3ImageUpload";
+import getSubCategories from "../../../services/getSubCategories";
 
 const textfieldStyles = {
   "& .MuiOutlinedInput-notchedOutline": {
@@ -46,19 +48,6 @@ const businesses = [
   { label: "Grocery shop", year: 1994 },
 ];
 
-const CountryCode = () => {
-  return (
-    <div className={styles["country-code-container"]}>
-      <img
-        className={styles["country-code-img"]}
-        src={indiaFlag}
-        alt="India flag"
-      />
-      <p className={styles["country-code-txt"]}>+91</p>
-    </div>
-  );
-};
-
 const getSearchParams = (props) => {
   props.InputProps.startAdornment = (
     <InputAdornment position="start">
@@ -68,7 +57,7 @@ const getSearchParams = (props) => {
   return props;
 };
 
-const FileInput = ({ index, handleImgUpload }) => {
+const FileInput = ({ handleImgUpload }) => {
   return (
     <label className={styles["file-input-container"]}>
       <input
@@ -84,13 +73,76 @@ const FileInput = ({ index, handleImgUpload }) => {
 };
 
 const RegisterForm = () => {
-  const handleDelete = () => {
-    console.info("You clicked the delete icon.");
+  const [categories, setCategories] = useState([]);
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const data = await getSubCategories();
+        setCategories(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getData();
+  }, []);
+
+  const { vendor, updateBusiness } = useContext(AuthContext);
+
+  const [bname, setBname] = useState(vendor?.business?.bname || "");
+  const [bwebsite, setBwebsite] = useState(vendor?.business?.bwebsite || "");
+  const [blocation, setBlocation] = useState(vendor?.business?.blocation || "");
+  const [btype, setBtype] = useState(vendor?.business?.btype || "individual");
+  const [babout, setBabout] = useState(vendor?.business?.babout || "");
+
+  const [files, setFiles] = useState(vendor?.business?.bphotos || []);
+
+  const [isLoading, setIsLoading] = useState(false);
+
+  const [autoCompleteValue, setAutoCompleteValue] = useState({});
+
+  const [selectedCategories, setSelectedCategories] = useState(
+    vendor?.categories || []
+  );
+
+  const handleCategorySelect = () => {
+    setSelectedCategories((prev) => [...prev, autoCompleteValue]);
+    setAutoCompleteValue({});
   };
 
-  const [files, setFiles] = useState([]);
-  const handleImgUpload = (data) => {
-    setFiles((prev) => [...prev, data]);
+  const handleCategoryDelete = (catId) => {
+    setSelectedCategories((prev) => prev?.filter((cat) => cat?.id !== catId));
+  };
+
+  const handleImgUpload = async (data) => {
+    try {
+      const url = await s3ImageUpload(data);
+      setFiles((prev) => [...prev, url]);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleVendorRegister = async (e) => {
+    e.preventDefault();
+    const data = {
+      business: {
+        bname,
+        bwebsite,
+        blocation,
+        btype,
+        babout,
+        bphotos: files,
+      },
+      categories: selectedCategories,
+    };
+    try {
+      setIsLoading(true);
+      await updateBusiness(data);
+      setIsLoading(false);
+    } catch (error) {
+      setIsLoading(false);
+      console.log(error);
+    }
   };
 
   return (
@@ -101,74 +153,8 @@ const RegisterForm = () => {
         borderRadius: "10px",
       }}
     >
-      <form className={styles["register-form"]}>
+      <form onSubmit={handleVendorRegister}>
         <div className={styles["form-wrapper"]}>
-          {/*  */}
-
-          <div className={styles["form-section"]} style={{ paddingTop: 0 }}>
-            <h2 className={styles["form-group-heading"]}>Profile Details</h2>
-            <div className={styles["register-icon-container"]}>
-              <div className={styles["profile-group"]}>
-                <img
-                  src={profileImg}
-                  alt="profile image"
-                  className={styles["register-icon"]}
-                />
-                <button className={styles["edit-icon-btn"]}></button>
-              </div>
-            </div>
-            <div className={styles["form-group"]}>
-              <Stack spacing={1} sx={{ mb: 3 }}>
-                <label htmlFor="name">Name</label>
-                <TextField
-                  id="name"
-                  sx={{ ...textfieldStyles }}
-                  variant="outlined"
-                />
-              </Stack>
-            </div>
-            <div className={styles["form-group"]}>
-              <Stack spacing={1} sx={{ mb: 3 }}>
-                <label htmlFor="mobile-number">Mobile Number</label>
-                <Box>
-                  <TextField
-                    fullWidth
-                    id="mobile-number"
-                    sx={{ ...textfieldStyles }}
-                    variant="outlined"
-                    InputProps={{
-                      startAdornment: (
-                        <InputAdornment position="start">
-                          <CountryCode />
-                        </InputAdornment>
-                      ),
-                    }}
-                  />
-                  <FormGroup
-                    sx={{ border: "1px solid #077BC1", borderTop: "none" }}
-                  >
-                    <Stack
-                      direction={"row"}
-                      justifyContent={"space-between"}
-                      alignItems={"center"}
-                    >
-                      <p style={{ paddingLeft: "10px" }}>
-                        Is this your WhatsApp number?
-                      </p>
-                      <Stack direction={"row"}>
-                        <FormControlLabel
-                          control={<Checkbox defaultChecked />}
-                          label="Yes"
-                        />
-                        <FormControlLabel control={<Checkbox />} label="No" />
-                      </Stack>
-                    </Stack>
-                  </FormGroup>
-                </Box>
-              </Stack>
-            </div>
-          </div>
-
           {/*  */}
 
           <div className={styles["form-section"]}>
@@ -177,31 +163,37 @@ const RegisterForm = () => {
             </h2>
             <div className={styles["form-group"]}>
               <Stack spacing={1} sx={{ mb: 3 }}>
-                <label htmlFor="name">Enter Your Business Name</label>
+                <label htmlFor="bname">Enter Your Business Name</label>
                 <TextField
-                  id="name"
+                  id="bname"
                   sx={{ ...textfieldStyles }}
                   variant="outlined"
+                  value={bname}
+                  onChange={(e) => setBname(e.target.value)}
                 />
               </Stack>
             </div>
             <div className={styles["form-group"]}>
               <Stack spacing={1} sx={{ mb: 3 }}>
-                <label htmlFor="name">Enter Your Business Website</label>
+                <label htmlFor="website">Enter Your Business Website</label>
                 <TextField
-                  id="name"
+                  id="website"
                   sx={{ ...textfieldStyles }}
                   variant="outlined"
+                  value={bwebsite}
+                  onChange={(e) => setBwebsite(e.target.value)}
                 />
               </Stack>
             </div>
             <div className={styles["form-group"]}>
               <Stack spacing={1} sx={{ mb: 3 }}>
-                <label htmlFor="name">Enter Your Business Location</label>
+                <label htmlFor="location">Enter Your Business Location</label>
                 <TextField
-                  id="name"
+                  id="location"
                   sx={{ ...textfieldStyles }}
                   variant="outlined"
+                  value={blocation}
+                  onChange={(e) => setBlocation(e.target.value)}
                 />
               </Stack>
             </div>
@@ -216,9 +208,10 @@ const RegisterForm = () => {
             <div className={styles["form-group"]}>
               <FormControl sx={{ mb: 2 }}>
                 <RadioGroup
-                  aria-labelledby="demo-radio-buttons-group-label"
-                  defaultValue="female"
-                  name="radio-buttons-group"
+                  aria-labelledby="btype-buttons-group-label"
+                  name="btype-buttons-group"
+                  value={btype}
+                  onChange={(e) => setBtype(e.target.value)}
                 >
                   <FormControlLabel
                     value="individual"
@@ -291,21 +284,14 @@ const RegisterForm = () => {
                 spacing={1}
                 sx={{ mb: 3, flexWrap: "wrap", gap: 1 }}
               >
-                <Chip
-                  label="Geyser Repair Service"
-                  variant="outlined"
-                  onDelete={handleDelete}
-                />
-                <Chip
-                  label="Plumber"
-                  variant="outlined"
-                  onDelete={handleDelete}
-                />
-                <Chip
-                  label="Plumber"
-                  variant="outlined"
-                  onDelete={handleDelete}
-                />
+                {selectedCategories?.map((cat, index) => (
+                  <Chip
+                    label={cat?.name}
+                    variant="outlined"
+                    onDelete={() => handleCategoryDelete(cat?.id)}
+                    key={index}
+                  />
+                ))}
               </Stack>
               <Stack spacing={1} sx={{ mb: 3 }}>
                 <label htmlFor="name">Search To Select Your Skills</label>
@@ -314,7 +300,11 @@ const RegisterForm = () => {
                     sx={{ flex: "1" }}
                     disablePortal
                     id="combo-box-demo"
-                    options={businesses}
+                    options={categories}
+                    getOptionLabel={(option) => option.name}
+                    onChange={(event, newValue) => {
+                      setAutoCompleteValue(newValue);
+                    }}
                     renderInput={(params) => (
                       <TextField
                         sx={{ ...textfieldStyles }}
@@ -324,7 +314,9 @@ const RegisterForm = () => {
                       />
                     )}
                   />
-                  <Button variant="contained">Add +</Button>
+                  <Button variant="contained" onClick={handleCategorySelect}>
+                    Add +
+                  </Button>
                 </Stack>
               </Stack>
               <div className={styles["info-box"]}>
@@ -366,19 +358,21 @@ const RegisterForm = () => {
                       borderRadius: "8px",
                     }}
                     alt="uploaded img"
-                    src={URL.createObjectURL(file)}
+                    src={file}
                   />
                 ))}
                 <FileInput handleImgUpload={handleImgUpload} />
               </Stack>
               <Stack spacing={1} sx={{ mb: 3 }}>
-                <label htmlFor="name">Write About Your Business</label>
+                <label htmlFor="about">Write About Your Business</label>
                 <TextField
-                  id="name"
+                  id="about"
                   sx={{ ...textfieldStyles }}
                   variant="outlined"
                   multiline
                   rows={6}
+                  value={babout}
+                  onChange={(e) => setBabout(e.target.value)}
                 />
               </Stack>
             </div>
@@ -391,7 +385,11 @@ const RegisterForm = () => {
               sx={{ padding: "20px 200px" }}
               size="large"
             >
-              Register
+              {isLoading ? (
+                <CircularProgress size={20} color="inherit" />
+              ) : (
+                "update"
+              )}
             </Button>
           </Stack>
         </div>

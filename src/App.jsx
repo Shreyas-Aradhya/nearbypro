@@ -22,14 +22,14 @@ function App() {
             </GuestGuard>
           }
         />
-        <Route
+        {/* <Route
           path="/register"
           element={
             <GuestGuard>
               <RegisterPage />
             </GuestGuard>
           }
-        />
+        /> */}
         <Route
           path="/profile"
           element={

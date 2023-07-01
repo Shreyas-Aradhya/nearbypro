@@ -2,6 +2,10 @@
   padding: 50px 0px;
 }
 
+.form-section:first-child {
+  padding: 0px 0px 50px 0px;
+}
+
 .form-group {
   width: 100%;
   max-width: 600px;
@@ -22,13 +26,23 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  padding: 50px 0px 100px 0px;
+  padding: 40px 0px 50px 0px;
 }
 
 .profile-group {
   width: 200px;
   height: 200px;
   position: relative;
+}
+
+.profile-image-container {
+  overflow: hidden;
+  width: 200px;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
 }
 
 .edit-icon-btn {
@@ -43,6 +57,7 @@
   background-size: contain;
   border: none;
   border-radius: 50%;
+  cursor: pointer;
 }
 
 .country-code-container {

@@ -29,10 +29,10 @@
   margin: 0px 40px;
 }
 
-.nav-item:first-child {
+.nav-item {
   margin-left: 0px;
-  font-size: 2rem;
-  text-decoration: underline;
+  font-size: 1.3rem;
+  /* text-decoration: underline; */
   font-family: "Nunito sans";
   font-weight: 600;
 }
@@ -117,7 +117,7 @@
     border-bottom: 1px solid #ff9324;
   }
 
-  .nav-item:first-child {
+  .nav-item {
     margin-left: 0px;
     font-size: 1rem;
     text-decoration: none;
@@ -131,6 +131,7 @@
     font-size: 1rem;
     font-weight: 500;
     border-bottom: none;
+    background: transparent;
   }
   .nav-item:last-child button {
     border: none;

@@ -2,6 +2,8 @@ import Button from "../../../components/Button/Button";
 import styles from "./HeroBanner.module.css";
 import locationIcon from "/icons/location-icon.svg";
 
+import { NavLink } from "react-router-dom";
+
 const HeroBanner = () => {
   return (
     <div className={styles["banner-wrapper"]}>
@@ -23,9 +25,9 @@ const HeroBanner = () => {
           on nearby pro
         </div>
         <div className={styles["cta"]}>
-          <a href="/register">
+          <NavLink to="/profile">
             <Button variant="primary">List your business for free</Button>
-          </a>
+          </NavLink>
         </div>
       </div>
     </div>
