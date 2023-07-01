@@ -1,5 +1,5 @@
 {
-  "homepage": "https://nearby-pro.onrender.com/",
+  "proxy": "http://localhost:8001",
   "name": "nearby-pro",
   "private": true,
   "version": "0.0.0",
