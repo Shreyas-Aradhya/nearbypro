@@ -46,7 +46,8 @@ const SigninForm = () => {
     try {
       const otp = await requestOtp(mobileNumber);
       setOtpSent(true);
-      setOtp(otp);
+      // setOtp(otp);
+      alert(`Your otp is ${otp}`);
     } catch (error) {
       console.log(error);
     }
@@ -100,13 +101,13 @@ const SigninForm = () => {
                 variant="outlined"
                 size="small"
                 type="password"
-                InputProps={{
-                  endAdornment: (
-                    <InputAdornment position="end">
-                      <p>Resend (45sec)</p>
-                    </InputAdornment>
-                  ),
-                }}
+                // InputProps={{
+                //   endAdornment: (
+                //     <InputAdornment position="end">
+                //       <p>Resend (45sec)</p>
+                //     </InputAdornment>
+                //   ),
+                // }}
                 value={otp}
                 onChange={(e) => setOtp(e.target.value)}
               />
