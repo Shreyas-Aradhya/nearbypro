@@ -1,5 +1,5 @@
 {
-  "proxy": "http://ec2-43-204-229-119.ap-south-1.compute.amazonaws.com:8001/",
+  "proxy": "http://ec2-43-204-229-119.ap-south-1.compute.amazonaws.com:8000/",
   "name": "nearby-pro",
   "private": true,
   "version": "0.0.0",
