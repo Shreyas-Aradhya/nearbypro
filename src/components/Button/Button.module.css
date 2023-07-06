@@ -3,8 +3,10 @@
   font-size: 1.2rem;
   font-weight: 600;
   cursor: pointer;
-  border: 2px solid;
+  border-width: 2px;
+  border-style: solid;
   transition: all 0.5s ease;
+  border-radius: 100px;
 }
 
 .btn:active {
@@ -13,7 +15,6 @@
 }
 
 .btn-primary {
-  border-radius: 100px;
   border-color: #ff9324;
   background-color: #ff9324;
   color: #ffffff;
@@ -25,15 +26,21 @@
 }
 
 .btn-secondary {
-  border-radius: 100px;
   border-color: transparent;
   background-color: #ffffff;
   color: #ff9324;
 }
 
 .btn-secondary:hover {
-  border-radius: 100px;
   border-color: #ffffff;
   background-color: #ff9324;
   color: #ffffff;
+}
+
+@media (max-width: 576px) {
+  .btn {
+    padding: 5px 15px;
+    font-size: 1.1rem;
+    font-weight: 500;
+  }
 }

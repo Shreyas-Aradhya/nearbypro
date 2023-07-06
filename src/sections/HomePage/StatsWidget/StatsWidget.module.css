@@ -18,10 +18,11 @@
 
 .stats-title {
   text-align: center;
+  font-size: 1.5rem;
 }
 
 @media (max-width: 576px) {
-  .stats-container {
+  /* .stats-container {
     flex-direction: column;
   }
   .stats-item {
@@ -30,5 +31,15 @@
   .stats-item:first-child,
   .stats-item:last-child {
     margin: 0px 0px;
+  } */
+
+  .stats-wrapper {
+    padding: 30px 20px;
+  }
+  .stats-count {
+    font-size: 1.3rem;
+  }
+  .stats-title {
+    font-size: 0.8rem;
   }
 }

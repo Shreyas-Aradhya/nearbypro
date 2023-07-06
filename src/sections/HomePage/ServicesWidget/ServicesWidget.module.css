@@ -19,11 +19,11 @@
 .service-icon-container {
   width: 50px;
   height: 50px;
-  background-color: #ffffff;
+  /* background-color: #ffffff;
   box-shadow: 0px 3px 6px #00000029;
-  border-radius: 9px;
+  border-radius: 9px; */
   margin-bottom: 20px;
-  padding: 5px;
+  padding: 2px;
 }
 
 .service-title {
@@ -41,10 +41,27 @@
   .services-grid {
     grid-template-columns: repeat(3, 1fr);
   }
+  .service-icon-container {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 10px;
+  }
+  .service-title {
+    font-size: 1rem;
+  }
 }
 
 @media (max-width: 567px) {
   .services-grid {
-    grid-template-columns: repeat(2, 1fr);
+    row-gap: 20px;
+    column-gap: 20px;
+  }
+  .service-icon-container {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 5px;
+  }
+  .service-title {
+    font-size: 0.9rem;
   }
 }

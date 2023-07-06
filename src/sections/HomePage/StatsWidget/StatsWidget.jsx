@@ -14,9 +14,9 @@ const StatsWidget = () => {
     <div className={styles["stats-wrapper"]}>
       <div className="container">
         <div className={styles["stats-container"]}>
-          <StatsItem count="50+ M" title="Happy Users" />
-          <StatsItem count="1+ M" title="Verified experts" />
-          <StatsItem count="600+" title="Categories" />
+          <StatsItem count="30+ M" title="Happy Users" />
+          <StatsItem count="200+ K" title="Verified experts" />
+          <StatsItem count="200+" title="Categories" />
         </div>
       </div>
     </div>

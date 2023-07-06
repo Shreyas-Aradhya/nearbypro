@@ -15,11 +15,9 @@ const Navbar = () => {
     <nav className={styles.navbar}>
       <div className="container">
         <div className={styles["nav-container"]}>
-          <div className={styles["logo-container"]}>
-            <NavLink to="/">
-              <img src={nearbyLogo} alt="nearby-pro logo" />
-            </NavLink>
-          </div>
+          <NavLink to="/" className={styles["logo-container"]}>
+            <img src={nearbyLogo} alt="nearby-pro logo" />
+          </NavLink>
           <div className={styles["nav-group"]}>
             <ul className={styles["nav-list"]}>
               <li className={styles["nav-item"]}>
