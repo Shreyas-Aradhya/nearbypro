@@ -1,6 +1,7 @@
 import Navbar from "./layout/nav/Navbar";
 import Footer from "./layout/footer/Footer";
 import Homepage from "./pages/Home/Homepage";
+import CategoryPage from "./pages/Home/CategoryPage";
 import SigninPage from "./pages/SigninPage/SigninPage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import AuthGuard from "./gaurds/AuthGuard";
@@ -14,6 +15,9 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Homepage />} />
+        <Route path="/category">
+          <Route path=":name" element={<CategoryPage />} />
+        </Route>
         <Route
           path="/signin"
           element={
