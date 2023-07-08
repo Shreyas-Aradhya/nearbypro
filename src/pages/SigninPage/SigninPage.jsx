@@ -1,9 +1,18 @@
 import SigninForm from "../../sections/SigninPage/SiginForm/SigninForm";
 import styles from "./SigninPage.module.css";
 
+import { Helmet } from "react-helmet-async";
+
 const SigninPage = () => {
   return (
     <div className={styles["page-container"]}>
+      <Helmet>
+        <title>Signin | Nearby-pro</title>
+        <meta
+          name="description"
+          content="FREE LIST YOUR BUSINESS ON NEARBY PRO"
+        />
+      </Helmet>
       <div className={styles["signin-img-container"]}></div>
       <div className={styles["signin-form-container"]}>
         <div className={styles["signin-form-wrapper"]}>

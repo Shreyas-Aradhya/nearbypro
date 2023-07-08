@@ -8,10 +8,11 @@ import AuthGuard from "./gaurds/AuthGuard";
 import GuestGuard from "./gaurds/GuestGuard";
 
 import { Route, Routes } from "react-router-dom";
+import { HelmetProvider } from "react-helmet-async";
 
 function App() {
   return (
-    <>
+    <HelmetProvider>
       <Navbar />
       <Routes>
         <Route path="/" element={<Homepage />} />
@@ -44,7 +45,7 @@ function App() {
         ></Route>
       </Routes>
       <Footer />
-    </>
+    </HelmetProvider>
   );
 }
 

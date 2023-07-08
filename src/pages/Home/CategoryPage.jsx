@@ -7,6 +7,7 @@ import TwoColumnAbout from "../../sections/HomePage/TwoColumnAbout/TwoColumnAbou
 import SubCategoriesWidget from "../../sections/HomePage/ServicesWidget/SubCategoriesWidget";
 
 import { useParams, useLocation } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 const CategoryPage = () => {
   const location = useLocation();
@@ -14,6 +15,10 @@ const CategoryPage = () => {
   console.log(location?.state?.subCategories);
   return (
     <div>
+      <Helmet>
+        <title>{`${name} | Nearby-pro`}</title>
+        <meta name="description" content={`${name} on nearby pro`} />
+      </Helmet>
       <HeroBanner title={name} />
       <StatsWidget />
       {!name && <ServicesWidget />}

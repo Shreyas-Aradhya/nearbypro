@@ -5,9 +5,18 @@ import ServicesWidget from "../../sections/HomePage/ServicesWidget/ServicesWidge
 import StatsWidget from "../../sections/HomePage/StatsWidget/StatsWidget";
 import TwoColumnAbout from "../../sections/HomePage/TwoColumnAbout/TwoColumnAbout";
 
+import { Helmet } from "react-helmet-async";
+
 const Homepage = () => {
   return (
     <div>
+      <Helmet>
+        <title>Home | Nearby-pro</title>
+        <meta
+          name="description"
+          content="FREE LIST YOUR BUSINESS ON NEARBY PRO"
+        />
+      </Helmet>
       <HeroBanner />
       <StatsWidget />
       <ServicesWidget />
