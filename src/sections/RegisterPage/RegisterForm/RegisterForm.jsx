@@ -38,15 +38,15 @@ const textfieldStyles = {
   },
 };
 
-const businesses = [
-  { label: "Bakery", year: 1994 },
-  { label: "Electrician", year: 1972 },
-  { label: "Restaurant: Part II", year: 1974 },
-  { label: "Cafe", year: 2008 },
-  { label: "Co-working space", year: 1957 },
-  { label: "Clinic", year: 1993 },
-  { label: "Grocery shop", year: 1994 },
-];
+// const businesses = [
+//   { label: "Bakery", year: 1994 },
+//   { label: "Electrician", year: 1972 },
+//   { label: "Restaurant: Part II", year: 1974 },
+//   { label: "Cafe", year: 2008 },
+//   { label: "Co-working space", year: 1957 },
+//   { label: "Clinic", year: 1993 },
+//   { label: "Grocery shop", year: 1994 },
+// ];
 
 const getSearchParams = (props) => {
   props.InputProps.startAdornment = (

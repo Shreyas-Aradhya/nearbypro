@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+
 import Navbar from "../../layout/nav/Navbar";
 
 import ProfileForm from "../../sections/RegisterPage/RegisterForm/ProfileForm";
@@ -7,6 +9,10 @@ import styles from "./RegisterPage.module.css";
 import { Helmet } from "react-helmet-async";
 
 const RegisterPage = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <>
       <Helmet>

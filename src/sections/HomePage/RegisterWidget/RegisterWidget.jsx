@@ -1,7 +1,7 @@
 import styles from "./RegisterWidget.module.css";
 import Button from "../../../components/Button/Button";
 
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const RegisterWidget = () => {
   return (
@@ -9,9 +9,9 @@ const RegisterWidget = () => {
       <div className="container">
         <div className={styles["cta-container"]}>
           <h2 className={styles["title"]}>Register your business here</h2>
-          <NavLink to="/profile">
+          <Link to="/profile">
             <Button variant={"secondary"}>Click here to register</Button>
-          </NavLink>
+          </Link>
         </div>
       </div>
     </div>
