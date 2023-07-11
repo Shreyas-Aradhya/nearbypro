@@ -15,15 +15,14 @@ const HeroBanner = ({ title, banner, description }) => {
     >
       <div className="container">
         <div className={styles["heading-container"]}>
-          {!title ? (
+          {!title && (
             <div className={styles["heading-icon"]}>
               <img src={locationIcon} alt="location icon" />
             </div>
-          ) : (
-            <h2 className={styles["heading-title"]}>
-              {title ? title : "LOCATION"}
-            </h2>
           )}
+          <h2 className={styles["heading-title"]}>
+            {title ? title : "LOCATION"}
+          </h2>
         </div>
         {!title && (
           <>
