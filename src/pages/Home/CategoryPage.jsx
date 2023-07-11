@@ -14,18 +14,21 @@ import { Helmet } from "react-helmet-async";
 const CategoryPage = () => {
   const location = useLocation();
   let { name } = useParams();
-  console.log(location?.state?.subCategories);
+  console.log(location?.state);
   return (
     <div>
       <Helmet>
-        <title>{`${name} | Nearby-pro`}</title>
-        <meta name="description" content={`${name} on nearby pro`} />
+        <title>{location?.state?.metaTitle || `${name} | Nearby-pro`}</title>
+        <meta
+          name="description"
+          content={location?.state?.metaDescription || `${name} on nearby pro`}
+        />
       </Helmet>
       <div className="header">
         <header className="nav-header">
           <Navbar />
         </header>
-        <HeroBanner title={name} />
+        <HeroBanner title={name} banner={location?.state?.banner} />
       </div>
       <StatsWidget />
       {!name && <ServicesWidget />}

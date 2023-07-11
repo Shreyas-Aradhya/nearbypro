@@ -6,9 +6,19 @@ import { Link } from "react-router-dom";
 
 import getCategories from "../../../services/getCategories";
 
-const ServiceItem = ({ icon, title, subCategories }) => {
+const ServiceItem = ({
+  icon,
+  title,
+  subCategories,
+  banner,
+  metaTitle,
+  metaDescription,
+}) => {
   return (
-    <Link to={`/category/${title}`} state={{ subCategories }}>
+    <Link
+      to={`/category/${title}`}
+      state={{ subCategories, banner, metaTitle, metaDescription }}
+    >
       <div className={styles["service-item"]}>
         <div className={styles["service-icon-container"]}>
           <img src={icon} alt="category-icon" />
@@ -44,6 +54,9 @@ const ServicesWidget = () => {
               title={category?.name}
               icon={category?.image}
               subCategories={category?.subCategory}
+              banner={category?.banner}
+              metaTitle={category?.meta_title}
+              metaDescription={category?.meta_description}
             />
           ))}
           {/* <ServiceItem
