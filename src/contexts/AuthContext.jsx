@@ -136,7 +136,7 @@ function AuthProvider({ children }) {
       console.log(message);
       return otp;
     } catch (error) {
-      throw new Error(error);
+      throw new Error(error.message);
     }
   };
 
@@ -169,7 +169,6 @@ function AuthProvider({ children }) {
         },
       });
     } catch (error) {
-      console.log(error);
       dispatch({
         type: "INITIALIZE",
         payload: {
@@ -178,6 +177,7 @@ function AuthProvider({ children }) {
           vendor: null,
         },
       });
+      throw new Error(error.message);
     }
   };
 

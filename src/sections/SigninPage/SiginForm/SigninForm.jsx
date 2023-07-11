@@ -35,8 +35,10 @@ const CountryCode = () => {
 
 const SigninForm = () => {
   const [mobileNumber, setMobileNumber] = useState("");
+  const [mobileNumberErr, setMobileNumberErr] = useState("");
   const [otpSent, setOtpSent] = useState(false);
   const [otp, setOtp] = useState("");
+  const [otpErr, setOtpErr] = useState("");
 
   const navigate = useNavigate();
 
@@ -47,9 +49,11 @@ const SigninForm = () => {
       const otp = await requestOtp(mobileNumber);
       setOtpSent(true);
       // setOtp(otp);
+      setMobileNumberErr("");
       alert(`Your otp is ${otp}`);
     } catch (error) {
-      console.log(error);
+      console.log(error.message);
+      setMobileNumberErr(error.message);
     }
   };
 
@@ -57,9 +61,11 @@ const SigninForm = () => {
     e.preventDefault();
     try {
       await verifyOtp(otp, mobileNumber);
+      setOtpErr("");
       navigate("/profile");
     } catch (error) {
-      console.log(error);
+      console.log(error.message);
+      setOtpErr(error.message);
     }
   };
 
@@ -70,6 +76,8 @@ const SigninForm = () => {
           <label htmlFor="mobile-number">Mobile Number</label>
           <TextField
             id="mobile-number"
+            error={mobileNumberErr.length > 0}
+            helperText={mobileNumberErr}
             sx={{ ...textfieldStyles }}
             variant="outlined"
             size="small"
@@ -101,6 +109,8 @@ const SigninForm = () => {
                 variant="outlined"
                 size="small"
                 type="password"
+                error={otpErr.length > 0}
+                helperText={otpErr}
                 // InputProps={{
                 //   endAdornment: (
                 //     <InputAdornment position="end">
