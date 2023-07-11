@@ -98,15 +98,20 @@ const RegisterForm = () => {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const [autoCompleteValue, setAutoCompleteValue] = useState({});
+  const [autoCompleteValue, setAutoCompleteValue] = useState(null);
 
   const [selectedCategories, setSelectedCategories] = useState(
     vendor?.categories || []
   );
 
   const handleCategorySelect = () => {
-    setSelectedCategories((prev) => [...prev, autoCompleteValue]);
-    setAutoCompleteValue({});
+    if (
+      autoCompleteValue &&
+      !selectedCategories?.find((cat) => cat?.id === autoCompleteValue?.id)
+    ) {
+      setSelectedCategories((prev) => [...prev, autoCompleteValue]);
+      setAutoCompleteValue(null);
+    }
   };
 
   const handleCategoryDelete = (catId) => {
@@ -301,7 +306,8 @@ const RegisterForm = () => {
                     disablePortal
                     id="combo-box-demo"
                     options={categories}
-                    getOptionLabel={(option) => option.name}
+                    getOptionLabel={(option) => option?.name || ""}
+                    value={autoCompleteValue}
                     onChange={(event, newValue) => {
                       setAutoCompleteValue(newValue);
                     }}
