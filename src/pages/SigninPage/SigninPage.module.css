@@ -1,7 +1,7 @@
 .page-container {
   display: flex;
   width: 100%;
-  height: calc(100vh - 80px);
+  height: calc(100vh);
 }
 
 .signin-img-container {
@@ -10,6 +10,18 @@
   background-repeat: no-repeat;
   background-size: cover;
   width: 60%;
+  position: relative;
+}
+
+.signin-img-container::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 1;
 }
 
 .signin-form-container {

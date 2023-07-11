@@ -1,4 +1,3 @@
-import Navbar from "./layout/nav/Navbar";
 import Footer from "./layout/footer/Footer";
 import Homepage from "./pages/Home/Homepage";
 import CategoryPage from "./pages/Home/CategoryPage";
@@ -13,7 +12,6 @@ import { HelmetProvider } from "react-helmet-async";
 function App() {
   return (
     <HelmetProvider>
-      <Navbar />
       <Routes>
         <Route path="/" element={<Homepage />} />
         <Route path="/category">

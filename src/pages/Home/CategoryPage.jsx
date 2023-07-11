@@ -1,3 +1,5 @@
+import Navbar from "../../layout/nav/Navbar";
+
 import HeroBanner from "../../sections/HomePage/HeroBanner/HeroBanner";
 import OurTeamWidget from "../../sections/HomePage/OurTeamWidget/OurTeamWidget";
 import RegisterWidget from "../../sections/HomePage/RegisterWidget/RegisterWidget";
@@ -19,7 +21,12 @@ const CategoryPage = () => {
         <title>{`${name} | Nearby-pro`}</title>
         <meta name="description" content={`${name} on nearby pro`} />
       </Helmet>
-      <HeroBanner title={name} />
+      <div className="header">
+        <header className="nav-header">
+          <Navbar />
+        </header>
+        <HeroBanner title={name} />
+      </div>
       <StatsWidget />
       {!name && <ServicesWidget />}
       {location?.state?.subCategories?.length > 0 && (

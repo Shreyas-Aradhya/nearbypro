@@ -1,3 +1,4 @@
+import Navbar from "../../layout/nav/Navbar";
 import HeroBanner from "../../sections/HomePage/HeroBanner/HeroBanner";
 import OurTeamWidget from "../../sections/HomePage/OurTeamWidget/OurTeamWidget";
 import RegisterWidget from "../../sections/HomePage/RegisterWidget/RegisterWidget";
@@ -17,7 +18,12 @@ const Homepage = () => {
           content="FREE LIST YOUR BUSINESS ON NEARBY PRO"
         />
       </Helmet>
-      <HeroBanner />
+      <div className="header">
+        <header className="nav-header">
+          <Navbar />
+        </header>
+        <HeroBanner />
+      </div>
       <StatsWidget />
       <ServicesWidget />
       <TwoColumnAbout />

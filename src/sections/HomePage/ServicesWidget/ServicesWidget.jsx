@@ -36,7 +36,7 @@ const ServicesWidget = () => {
 
   return (
     <div className={styles["services-widget-wrapper"]}>
-      <div className="container">
+      <div className="container-xl">
         <div className={styles["services-grid"]}>
           {categories?.map((category, index) => (
             <ServiceItem
@@ -46,6 +46,11 @@ const ServicesWidget = () => {
               subCategories={category?.subCategory}
             />
           ))}
+          {/* <ServiceItem
+            title={"Automobiles Applications"}
+            icon="https://www.iconpacks.net/icons/2/free-store-icon-2017-thumb.png"
+            subCategories={[]}
+          /> */}
         </div>
       </div>
     </div>
