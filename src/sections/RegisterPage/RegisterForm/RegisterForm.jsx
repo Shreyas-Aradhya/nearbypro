@@ -1,9 +1,10 @@
 import styles from "./RegisterForm.module.css";
 import infoIcon from "/img/info-icon.png";
 import uploadIcon from "/img/upload-icon.png";
+import bannedIcon from "/icons/banned-icon.svg";
 import searchIcon from "/icons/search-icon.svg";
 
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, useRef } from "react";
 
 // mui
 import Box from "@mui/material/Box";
@@ -59,17 +60,30 @@ const getSearchParams = (props) => {
   return props;
 };
 
-const FileInput = ({ handleImgUpload }) => {
+const FileInput = ({ handleImgUpload, disabled }) => {
+  const inputRef = useRef(null);
+  const onUpload = (e) => {
+    if (e.target.files[0]) {
+      handleImgUpload(e.target.files[0]);
+      inputRef.current.value = null;
+    }
+  };
   return (
     <label className={styles["file-input-container"]}>
       <input
         type="file"
         name="custom-file-input"
         id="custom-file-input"
-        onChange={(e) => handleImgUpload(e.target.files[0])}
+        ref={inputRef}
+        onChange={onUpload}
         className={styles["custom-file-input"]}
+        disabled={disabled}
       />
-      <img src={uploadIcon} alt="upload button icon" width={20} />
+      <img
+        src={disabled ? bannedIcon : uploadIcon}
+        alt="upload button icon"
+        width={20}
+      />
     </label>
   );
 };
@@ -127,6 +141,12 @@ const RegisterForm = () => {
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const handleImgDelete = (index) => {
+    let updatedArr = [...files];
+    updatedArr.splice(index, 1);
+    setFiles(updatedArr);
   };
 
   const handleVendorRegister = async (e) => {
@@ -362,20 +382,30 @@ const RegisterForm = () => {
                 sx={{ mt: 2, mb: 3, flexWrap: "wrap", gap: 2 }}
               >
                 {files.map((file, index) => (
-                  <Box
-                    key={index}
-                    component="img"
-                    sx={{
-                      height: 130,
-                      width: 130,
-                      boxShadow: "0px 0px 6px #00000029",
-                      borderRadius: "8px",
-                    }}
-                    alt="uploaded img"
-                    src={file}
-                  />
+                  <Stack spacing={1} key={index}>
+                    <Box
+                      component="img"
+                      sx={{
+                        height: 130,
+                        width: 130,
+                        boxShadow: "0px 0px 6px #00000029",
+                        borderRadius: "8px",
+                      }}
+                      alt="uploaded img"
+                      src={file}
+                    />
+                    <Button
+                      color="error"
+                      onClick={() => handleImgDelete(index)}
+                    >
+                      Delete
+                    </Button>
+                  </Stack>
                 ))}
-                <FileInput handleImgUpload={handleImgUpload} />
+                <FileInput
+                  handleImgUpload={handleImgUpload}
+                  disabled={files?.length >= 5}
+                />
               </Stack>
               <Stack spacing={1} sx={{ mb: 3 }}>
                 <label htmlFor="about">Write About Your Business</label>
