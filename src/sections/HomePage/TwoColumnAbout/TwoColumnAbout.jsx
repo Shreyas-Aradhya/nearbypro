@@ -12,7 +12,9 @@ const ContentRow = ({ title, text, img }) => {
           <h3>{title}</h3>
         </div>
         <div className={styles["content-txt"]}>
-          <p>{text}</p>
+          {text?.map((p, index) => (
+            <p key={index}>{p}</p>
+          ))}
         </div>
       </div>
     </div>
@@ -28,33 +30,36 @@ const TwoColumnAbout = () => {
       <div className="container-xl">
         <ContentRow
           img={img1}
-          title="Authentic local news"
-          text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel
-                necessitatibus culpa fugit quasi. Minima numquam illo aut
-                eligendi? Aliquid porro rerum illum laudantium numquam iste, quo
-                explicabo fugiat necessitatibus, tempore obcaecati harum
-                asperiores nihil adipisci excepturi et? Soluta amet consequuntur
-                quam molestias! Quam similique in id nihil sapiente sunt eaque."
+          title="LocalPRO"
+          text={[
+            `Introducing LocalPRO, your trusted companion for all your home service needs! Developed by a team
+          of four experts with over 8+ years of experience in the on-demand home service industry, our app is
+          designed to make your life easier and more convenient.`,
+            `With Local Pro, you can effortlessly book a wide range of home services right from your smartphone.
+          Whether you need a plumber, electrician, cleaner, gardener, or handyman, we've got you covered.
+          Our team of highly skilled and reliable professionals is ready to tackle any task, big or small.`,
+          ]}
         />
         <ContentRow
           img={img1}
-          title="Authentic local news"
-          text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel
-                necessitatibus culpa fugit quasi. Minima numquam illo aut
-                eligendi? Aliquid porro rerum illum laudantium numquam iste, quo
-                explicabo fugiat necessitatibus, tempore obcaecati harum
-                asperiores nihil adipisci excepturi et? Soluta amet consequuntur
-                quam molestias! Quam similique in id nihil sapiente sunt eaque."
+          title="How it works"
+          text={[
+            `As a local professional, you can create a comprehensive business profile on our platform for free.
+            Highlight your expertise, showcase previous work, and provide relevant details about your services.
+            This profile acts as your digital business card, enabling customers to learn more about you.
+            LocalPRO connects you directly with customers who are actively seeking your expertise, boosting
+            your visibility and expanding your customer base. Maximize your earning potential and grow your
+            business with our user-friendly platform.`,
+          ]}
         />
         <ContentRow
           img={img1}
-          title="Authentic local news"
-          text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel
-                necessitatibus culpa fugit quasi. Minima numquam illo aut
-                eligendi? Aliquid porro rerum illum laudantium numquam iste, quo
-                explicabo fugiat necessitatibus, tempore obcaecati harum
-                asperiores nihil adipisci excepturi et? Soluta amet consequuntur
-                quam molestias! Quam similique in id nihil sapiente sunt eaque."
+          title="Customer Location-Based Listings"
+          text={[
+            `When customers open LocalPRO, they can view a list of local professionals based on their current
+            location. This feature ensures that customers find service providers who operate in their vicinity,
+            promoting convenience and minimizing travel time.`,
+          ]}
         />
       </div>
     </div>

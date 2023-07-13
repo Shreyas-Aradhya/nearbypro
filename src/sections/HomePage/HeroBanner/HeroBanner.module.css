@@ -8,11 +8,12 @@
   height: 100vh;
   position: relative;
   display: flex;
-  align-items: end;
+  align-items: center;
 }
 @media (max-width: 767px) {
   .banner-wrapper {
     height: auto;
+    align-items: end;
   }
 }
 .banner-wrapper::after {
@@ -58,9 +59,10 @@
 .tagline {
   font-size: 2.2rem;
   font-weight: 600;
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
   margin-bottom: 30px;
   color: #ffffff;
+  max-width: 500px;
 }
 
 .fancy-txt {

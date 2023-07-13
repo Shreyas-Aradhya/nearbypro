@@ -15,26 +15,23 @@ const HeroBanner = ({ title, banner, description }) => {
     >
       <div className="container">
         <div className={styles["heading-container"]}>
-          {!title && (
+          {/* {!title && (
             <div className={styles["heading-icon"]}>
               <img src={locationIcon} alt="location icon" />
             </div>
-          )}
+          )} */}
           <h2 className={styles["heading-title"]}>
-            {title ? title : "LOCATION"}
+            {title ? title : "Invest less Earn More.."}
           </h2>
         </div>
         {!title && (
           <>
             <div className={styles["subtitle"]}>
-              <h3>
-                Lorem ipsum dolor sit amet, <br /> consectetur adipisicing.
-              </h3>
+              <h3>Take your local professional services to new heights!</h3>
             </div>
             <div className={styles["tagline"]}>
-              <span className={styles["fancy-txt"]}>Free</span> list your
-              business <br />
-              on nearby pro
+              Join <span className={styles["fancy-txt"]}>LocalPro</span> today
+              and unleash the power of direct customer connections.
             </div>
           </>
         )}
@@ -45,7 +42,7 @@ const HeroBanner = ({ title, banner, description }) => {
         )}
         <div className={styles["cta"]}>
           <Link to="/profile">
-            <Button variant="primary">List your business for free</Button>
+            <Button variant="primary">List your business now</Button>
           </Link>
         </div>
       </div>

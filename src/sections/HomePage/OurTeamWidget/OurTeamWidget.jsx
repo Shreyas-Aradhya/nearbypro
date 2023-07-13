@@ -2,13 +2,14 @@ import styles from "./OurTeamWidget.module.css";
 import team1 from "/img/team1.jpg";
 import team2 from "/img/team2.jpg";
 
-const OurTeamItem = ({ photo, name, description }) => {
+const OurTeamItem = ({ photo, name, description, designation }) => {
   return (
     <div className={styles["our-team-item"]}>
       <div className={styles["photo-container"]}>
         <img src={photo} alt="team photo" />
       </div>
       <h3 className={styles["name"]}>{name}</h3>
+      <h4 className={styles["designation"]}>{designation}</h4>
       <p className={styles["description"]}>{description}</p>
     </div>
   );
@@ -24,22 +25,37 @@ const OurTeamWidget = () => {
             <OurTeamItem
               photo={team1}
               name="Prakash"
-              description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem at fuga mollitia."
+              designation="Founder"
+              description="The Visionary founder behind the groundbreaking LocalPRO. An visionary leader driving
+              transformation in the On-Demand Service industry, With an impressive 15+ years of experience in the
+              on-demand service industry."
             />
             <OurTeamItem
               photo={team2}
-              name="Prakash"
-              description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem at fuga mollitia."
+              name="Basavaraj R"
+              designation="CTO"
+              description="With an impressive 7+ years of experience in the field of technology, brings invaluable
+              expertise and innovation to the development and growth of the app. With a deep understanding of
+              software architecture, mobile app frameworks, and emerging technologies, he leads our talented team
+              of developers in creating a robust and cutting-edge solution."
             />
             <OurTeamItem
               photo={team1}
-              name="Prakash"
-              description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem at fuga mollitia."
+              name="Anil Kumar HR"
+              designation="Marketing Manager"
+              description="With years of experience in the industry, He brings a wealth of knowledge in
+              developing effective marketing strategies to create brand awareness
+              and drive user acquisition. His expertise lies in understanding customer behavior, market trends, and
+              utilizing various marketing channels to maximize reach and impact."
             />
             <OurTeamItem
               photo={team2}
-              name="Prakash"
-              description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem at fuga mollitia."
+              name="Naveen Kumar GV"
+              designation="Creative Director"
+              description="Introducing Naveen Kumar GV, our talented Creative Director responsible for
+              crafting captivating and visually stunning content for the [App Name] website. With a keen eye for
+              design and a passion for creating immersive user experiences, Naveen brings a wealth of creativity
+              and expertise to our digital platform."
             />
           </div>
         </div>

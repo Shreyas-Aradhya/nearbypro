@@ -38,6 +38,14 @@
   margin-bottom: 10px;
 }
 
+.content-txt p {
+  margin-bottom: 10px;
+}
+
+.content-txt p:last-child {
+  margin-bottom: 0px;
+}
+
 @media (max-width: 767px) {
   /* .content-row,
   .content-row:nth-child(even) {
