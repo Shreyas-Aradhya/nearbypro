@@ -10,6 +10,8 @@ import Button from "@mui/material/Button";
 // context
 import { AuthContext } from "../../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
+// hooks
+import { useCountdown } from "../../../hooks/useCountdown";
 
 const textfieldStyles = {
   "& .MuiOutlinedInput-notchedOutline": {
@@ -33,12 +35,25 @@ const CountryCode = () => {
   );
 };
 
+const TimerDisplay = ({ setShowTimer, timerValue }) => {
+  const { seconds } = useCountdown(timerValue);
+  if (seconds < 0) {
+    setShowTimer(false);
+  }
+  return <p>Resend ({seconds})</p>;
+};
+
 const SigninForm = () => {
   const [mobileNumber, setMobileNumber] = useState("");
   const [mobileNumberErr, setMobileNumberErr] = useState("");
   const [otpSent, setOtpSent] = useState(false);
   const [otp, setOtp] = useState("");
   const [otpErr, setOtpErr] = useState("");
+  const [otpCount, setOtpCount] = useState(0);
+  const [showTimer, setShowTimer] = useState(false);
+  const [timerValue, setTimerValue] = useState(
+    new Date().setSeconds(new Date().getSeconds() + 30)
+  );
 
   const navigate = useNavigate();
 
@@ -46,9 +61,17 @@ const SigninForm = () => {
 
   const handleRequestOtp = async () => {
     try {
+      let numberPattern = /^[6-9]\d{9}$/;
+      if (!mobileNumber.length > 0) throw new Error("Enter mobile number");
+      if (!numberPattern.test(mobileNumber))
+        throw new Error("Invalid mobile number");
       const otp = await requestOtp(mobileNumber);
       setOtpSent(true);
-      // setOtp(otp);
+      if (otpCount < 4) {
+        setShowTimer(true);
+        setOtpCount((prev) => prev + 1);
+        setTimerValue(new Date().setSeconds(new Date().getSeconds() + 30));
+      }
       setMobileNumberErr("");
       alert(`Your otp is ${otp}`);
     } catch (error) {
@@ -60,6 +83,7 @@ const SigninForm = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
+      if (!otp.length > 0) throw new Error("Enter OTP");
       await verifyOtp(otp, mobileNumber);
       setOtpErr("");
       navigate("/profile");
@@ -111,13 +135,27 @@ const SigninForm = () => {
                 type="password"
                 error={otpErr.length > 0}
                 helperText={otpErr}
-                // InputProps={{
-                //   endAdornment: (
-                //     <InputAdornment position="end">
-                //       <p>Resend (45sec)</p>
-                //     </InputAdornment>
-                //   ),
-                // }}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      {showTimer ? (
+                        <TimerDisplay
+                          setShowTimer={setShowTimer}
+                          timerValue={timerValue}
+                        />
+                      ) : (
+                        <Button
+                          variant="contained"
+                          size="small"
+                          onClick={handleRequestOtp}
+                          disabled={otpCount >= 4}
+                        >
+                          Resend OTP
+                        </Button>
+                      )}
+                    </InputAdornment>
+                  ),
+                }}
                 value={otp}
                 onChange={(e) => setOtp(e.target.value)}
               />
