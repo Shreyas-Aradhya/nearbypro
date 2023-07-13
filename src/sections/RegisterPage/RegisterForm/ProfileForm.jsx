@@ -20,6 +20,8 @@ import RadioGroup from "@mui/material/RadioGroup";
 
 import CircularProgress from "@mui/material/CircularProgress";
 
+import { enqueueSnackbar } from "notistack";
+
 import { AuthContext } from "../../../contexts/AuthContext";
 import s3ImageUpload from "../../../services/s3ImageUpload";
 
@@ -74,7 +76,7 @@ const ProfileForm = () => {
     user?.profilePicture || profileImg || ""
   );
   const handleImgUpload = async (data) => {
-    console.log(data);
+    // console.log(data);
     try {
       const url = await s3ImageUpload(data);
       console.log(url);
@@ -95,9 +97,13 @@ const ProfileForm = () => {
     try {
       setIsLoading(true);
       await updateProfile(data);
+      enqueueSnackbar("Profile updated successfully!", { variant: "success" });
       setIsLoading(false);
     } catch (error) {
       setIsLoading(false);
+      enqueueSnackbar("Failed to update!, Please try again later", {
+        variant: "error",
+      });
       console.log(error);
     }
   };

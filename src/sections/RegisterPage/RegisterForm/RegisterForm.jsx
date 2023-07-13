@@ -25,6 +25,8 @@ import Autocomplete from "@mui/material/Autocomplete";
 
 import CircularProgress from "@mui/material/CircularProgress";
 
+import { enqueueSnackbar } from "notistack";
+
 import { AuthContext } from "../../../contexts/AuthContext";
 import s3ImageUpload from "../../../services/s3ImageUpload";
 import getSubCategories from "../../../services/getSubCategories";
@@ -143,8 +145,14 @@ const RegisterForm = () => {
     try {
       setIsLoading(true);
       await updateBusiness(data);
+      enqueueSnackbar("Business info updated successfully!", {
+        variant: "success",
+      });
       setIsLoading(false);
     } catch (error) {
+      enqueueSnackbar("Failed to update!, Please try again later", {
+        variant: "error",
+      });
       setIsLoading(false);
       console.log(error);
     }
