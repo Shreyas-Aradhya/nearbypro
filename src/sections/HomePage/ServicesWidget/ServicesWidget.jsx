@@ -46,7 +46,7 @@ const ServicesWidget = () => {
 
   return (
     <div className={styles["services-widget-wrapper"]}>
-      <div className="container-xl">
+      <div className="container">
         <div className={styles["services-grid"]}>
           {categories?.map((category, index) => (
             <ServiceItem

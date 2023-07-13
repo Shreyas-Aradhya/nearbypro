@@ -17,7 +17,7 @@ const SigninPage = () => {
       </Helmet>
       <div className={styles["page-container"]}>
         <div className="nav-header">
-          <Navbar color="dark" />
+          <Navbar color="dark" logoOnly={true} />
         </div>
         <div className={styles["signin-img-container"]}></div>
         <div className={styles["signin-form-container"]}>

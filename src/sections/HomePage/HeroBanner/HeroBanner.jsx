@@ -21,7 +21,7 @@ const HeroBanner = ({ title, banner, description }) => {
             </div>
           )} */}
           <h2 className={styles["heading-title"]}>
-            {title ? title : "Invest less Earn More.."}
+            {title ? title : "Invest Less Earn More.."}
           </h2>
         </div>
         {!title && (
