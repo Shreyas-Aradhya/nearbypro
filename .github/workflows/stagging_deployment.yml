@@ -26,4 +26,4 @@ jobs:
       - run: |
           npm ci
           npm run build
-          rsync -rp ./dist /home/ubuntu/localpro-backend-runner/localpro/localpro/localpro/client
+          echo 'rsync -rp ./dist /home/ubuntu/localpro-backend-runner/localpro/localpro/localpro/client'
