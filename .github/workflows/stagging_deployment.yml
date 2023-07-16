@@ -25,4 +25,4 @@ jobs:
           cache: "npm"
       - run: |
           npm ci
-          npm run build --outDir /home/ubuntu/localpro-backend-runner/localpro/localpro/localpro/client/
+          npm run build --outDir /home/ubuntu
