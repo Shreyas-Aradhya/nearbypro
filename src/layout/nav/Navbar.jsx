@@ -1,5 +1,5 @@
 import styles from "./Navbar.module.css";
-import nearbyLogo from "/img/nearby-pro-logo.png";
+import localProLogo from "/img/local-pro-logo.png";
 
 import { useState } from "react";
 
@@ -58,7 +58,7 @@ const Navbar = ({ color = "light", logoOnly = false }) => {
       <div className="container">
         <div className={styles["nav-container"]}>
           <NavLink to="/" className={styles["logo-container"]}>
-            <img src={nearbyLogo} alt="nearby-pro logo" />
+            <img src={localProLogo} alt="nearby-pro logo" />
           </NavLink>
           {!logoOnly && (
             <div className={styles["nav-group"]}>
