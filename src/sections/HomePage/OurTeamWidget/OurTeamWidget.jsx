@@ -2,6 +2,8 @@ import styles from "./OurTeamWidget.module.css";
 import team1 from "/img/team1.jpg";
 import team2 from "/img/team2.jpg";
 
+import Slider from "react-slick";
+
 const OurTeamItem = ({ photo, name, description, designation }) => {
   return (
     <div className={styles["our-team-item"]}>
@@ -9,19 +11,58 @@ const OurTeamItem = ({ photo, name, description, designation }) => {
         <img src={photo} alt="team photo" />
       </div>
       <h3 className={styles["name"]}>{name}</h3>
-      <h4 className={styles["designation"]}>{designation}</h4>
+      {/* <h4 className={styles["designation"]}>{designation}</h4> */}
       <p className={styles["description"]}>{description}</p>
     </div>
   );
 };
 
 const OurTeamWidget = () => {
+  const settings = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 4,
+    slidesToScroll: 4,
+    initialSlide: 0,
+    responsive: [
+      {
+        breakpoint: 1280,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+        },
+      },
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+        },
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+  };
   return (
     <div className={styles["our-team-wrapper"]}>
       <div className="container">
         <h2 className={styles["section-title"]}>Our team</h2>
         <div className={styles["our-team-container"]}>
-          <div className={styles["our-team-grid"]}>
+          {/* <div className={styles["our-team-grid"]}> */}
+          <Slider {...settings}>
             <OurTeamItem
               photo={team1}
               name="Prakash"
@@ -57,7 +98,8 @@ const OurTeamWidget = () => {
               design and a passion for creating immersive user experiences, Naveen brings a wealth of creativity
               and expertise to our digital platform."
             />
-          </div>
+          </Slider>
+          {/* </div> */}
         </div>
       </div>
     </div>

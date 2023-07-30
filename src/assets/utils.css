@@ -45,5 +45,16 @@
   .container {
     max-width: 100%;
     width: 100vw;
+    padding: 0px 15px;
   }
+
+  .container-xl {
+    padding: 0px 15px;
+  }
+}
+
+/* Slick slider styles */
+.slick-prev:before,
+.slick-next:before {
+  color: black;
 }

@@ -36,8 +36,8 @@ const CategoryPage = () => {
         <SubCategoriesWidget subCategories={location?.state?.subCategories} />
       )}
       <TwoColumnAbout />
-      <RegisterWidget />
       <OurTeamWidget />
+      <RegisterWidget />
     </div>
   );
 };

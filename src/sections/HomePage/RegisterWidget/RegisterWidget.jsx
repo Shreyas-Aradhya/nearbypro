@@ -10,7 +10,9 @@ const RegisterWidget = () => {
         <div className={styles["cta-container"]}>
           <h2 className={styles["title"]}>Register your business here</h2>
           <Link to="/profile">
-            <Button variant={"secondary"}>Click here to register</Button>
+            <Button variant={"secondary"} className={styles["register-cta"]}>
+              Click here to register
+            </Button>
           </Link>
         </div>
       </div>

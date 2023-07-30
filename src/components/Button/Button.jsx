@@ -12,10 +12,10 @@ const getClassName = (key) => {
       return "btn-primary";
   }
 };
-const Button = ({ children, variant, ...others }) => {
+const Button = ({ children, variant, className, ...others }) => {
   return (
     <button
-      className={`${styles[getClassName(variant)]} ${styles.btn}`}
+      className={`${styles[getClassName(variant)]} ${styles.btn} ${className}`}
       {...others}
     >
       {children}

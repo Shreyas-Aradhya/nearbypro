@@ -33,9 +33,13 @@
 }
 
 .content-title {
+  margin-bottom: 10px;
+}
+
+.content-title h3 {
   font-size: 2rem;
   font-weight: 700;
-  margin-bottom: 10px;
+  line-height: 2.5rem;
 }
 
 .content-txt p {
@@ -61,11 +65,18 @@
   .content-row,
   .content-row:nth-child(even) {
     flex-direction: column;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  .content-row:last-child {
+    border-bottom: none;
   }
   .content-container {
-    width: auto;
+    width: 100%;
+    padding: 0px;
+    padding-bottom: 10px;
   }
   .img-container {
-    padding: 10px;
+    padding: 10px 0px;
   }
 }

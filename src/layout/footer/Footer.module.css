@@ -24,17 +24,28 @@
   margin-right: 0px;
 }
 
+.copyright-text {
+  display: flex;
+  align-items: center;
+}
+
 @media (max-width: 576px) {
-  .footer-container {
+  /* .footer-container {
     flex-direction: column-reverse;
-  }
+  } */
   .copyright-text {
-    text-align: center;
+    /* text-align: center; */
+    font-size: 0.9rem;
   }
-  .socials-list {
+
+  .footer-container {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 20px;
+    justify-content: space-between;
+    align-items: stretch;
+  }
+  .social-item {
+    width: 20px;
+    height: 20px;
+    margin: 0px 5px;
   }
 }

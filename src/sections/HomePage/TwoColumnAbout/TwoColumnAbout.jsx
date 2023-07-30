@@ -25,7 +25,7 @@ const TwoColumnAbout = () => {
   return (
     <div className={styles["two-column-container"]}>
       <div className="container">
-        <h2 className={styles["section-title"]}>What we do</h2>
+        <h2 className={styles["section-title"]}>About Us</h2>
       </div>
       <div className="container-xl">
         <ContentRow
@@ -35,9 +35,6 @@ const TwoColumnAbout = () => {
             `Introducing LocalPRO, your trusted companion for all your home service needs! Developed by a team
           of four experts with over 8+ years of experience in the on-demand home service industry, our app is
           designed to make your life easier and more convenient.`,
-            `With Local Pro, you can effortlessly book a wide range of home services right from your smartphone.
-          Whether you need a plumber, electrician, cleaner, gardener, or handyman, we've got you covered.
-          Our team of highly skilled and reliable professionals is ready to tackle any task, big or small.`,
           ]}
         />
         <ContentRow

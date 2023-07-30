@@ -50,9 +50,13 @@
 }
 
 .subtitle {
-  font-size: 1.8rem;
-  font-weight: 600;
   margin-bottom: 30px;
+}
+
+.subtitle h3 {
+  font-size: 1.8rem;
+  font-weight: 400;
+  max-width: 450px;
   color: #ffffff;
 }
 
@@ -75,7 +79,7 @@
   }
   .heading-container {
     align-items: center;
-    justify-content: start;
+    justify-content: center;
   }
   .heading-icon {
     width: 35px;
@@ -84,13 +88,23 @@
   .heading-title {
     font-size: 3rem;
     line-height: 3rem;
+    text-align: center;
   }
   .subtitle {
-    font-size: 1.5rem;
     margin-bottom: 25px;
+  }
+  .subtitle h3 {
+    max-width: 100%;
+    font-size: 1.5rem;
+    text-align: center;
   }
   .tagline {
     font-size: 2rem;
-    margin-bottom: 10px;
+    max-width: 100%;
+    /* margin: 0px auto 10px auto; */
+    text-align: center;
+  }
+  .cta {
+    text-align: center;
   }
 }

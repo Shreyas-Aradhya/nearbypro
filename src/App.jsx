@@ -11,6 +11,9 @@ import { HelmetProvider } from "react-helmet-async";
 
 import { SnackbarProvider } from "notistack";
 
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
 function App() {
   return (
     <SnackbarProvider autoHideDuration={3000}>

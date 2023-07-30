@@ -145,13 +145,13 @@
   }
 } */
 
-@media (max-width: 576px) {
+@media (max-width: 767px) {
   .navbar {
     padding: 15px 0px;
   }
-  .nav-container {
+  /* .nav-container {
     padding: 0px 20px;
-  }
+  } */
   .logo-container {
     width: 100px;
   }

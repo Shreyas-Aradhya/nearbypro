@@ -27,8 +27,8 @@ const Homepage = () => {
       <StatsWidget />
       <ServicesWidget />
       <TwoColumnAbout />
-      <RegisterWidget />
       <OurTeamWidget />
+      <RegisterWidget />
     </div>
   );
 };
