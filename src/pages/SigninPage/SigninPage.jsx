@@ -1,6 +1,6 @@
 import Navbar from "../../layout/nav/Navbar";
 
-import SigninForm from "../../sections/SigninPage/SiginForm/SigninForm";
+import SigninForm from "../../sections/SigninPage/SigninForm/SigninForm";
 import styles from "./SigninPage.module.css";
 
 import { Helmet } from "react-helmet-async";

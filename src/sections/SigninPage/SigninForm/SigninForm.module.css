@@ -1,3 +1,7 @@
+.form-container {
+  max-width: 300px;
+}
+
 .country-code-container {
   display: flex;
   align-items: center;

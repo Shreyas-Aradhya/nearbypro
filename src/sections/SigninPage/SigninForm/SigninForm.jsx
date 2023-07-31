@@ -12,6 +12,8 @@ import { AuthContext } from "../../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 // hooks
 import { useCountdown } from "../../../hooks/useCountdown";
+// react-otp-input
+import OtpInput from "react-otp-input";
 
 const textfieldStyles = {
   "& .MuiOutlinedInput-notchedOutline": {
@@ -40,7 +42,7 @@ const TimerDisplay = ({ setShowTimer, timerValue }) => {
   if (seconds < 0) {
     setShowTimer(false);
   }
-  return <p>Resend ({seconds})</p>;
+  return <small>Resend ({seconds})</small>;
 };
 
 const SigninForm = () => {
@@ -88,7 +90,7 @@ const SigninForm = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      if (!otp.length > 0) throw new Error("Enter OTP");
+      if (!otp.length > 0) throw new Error("Enter OTP!!");
       await verifyOtp(otp, mobileNumber);
       setOtpErr("");
       navigate("/profile");
@@ -116,12 +118,15 @@ const SigninForm = () => {
                   <CountryCode />
                 </InputAdornment>
               ),
-              endAdornment: otpSent && (
+              endAdornment: (
                 <InputAdornment position="end">
                   <Button
                     size="small"
                     onClick={handleNumberChange}
-                    sx={{ textTransform: "capitalize" }}
+                    sx={{
+                      textTransform: "capitalize",
+                      visibility: otpSent ? "visible" : "hidden",
+                    }}
                   >
                     change number
                   </Button>
@@ -143,41 +148,50 @@ const SigninForm = () => {
           <>
             <Stack spacing={1} sx={{ mb: 3 }}>
               <label htmlFor="otp">Enter OTP</label>
-              <TextField
-                id="otp"
-                sx={{ ...textfieldStyles }}
-                variant="outlined"
-                size="small"
-                type="password"
-                error={otpErr.length > 0}
-                helperText={otpErr}
-                InputProps={{
-                  endAdornment: (
-                    <InputAdornment position="end">
-                      {showTimer ? (
-                        <TimerDisplay
-                          setShowTimer={setShowTimer}
-                          timerValue={timerValue}
-                        />
-                      ) : (
-                        <Button
-                          variant="contained"
-                          size="small"
-                          onClick={handleRequestOtp}
-                          disabled={otpCount >= 4}
-                        >
-                          Resend OTP
-                        </Button>
-                      )}
-                    </InputAdornment>
-                  ),
-                }}
+              <OtpInput
                 value={otp}
-                onChange={(e) => setOtp(e.target.value)}
+                onChange={setOtp}
+                numInputs={4}
+                // renderSeparator={<span>-</span>}
+                renderInput={(props) => <input {...props} />}
+                containerStyle={{ gap: "3rem" }}
+                inputStyle={{
+                  flex: 1,
+                  aspectRatio: "1/1",
+                  border: "1px solid",
+                  borderColor: otpErr.length > 0 ? "red" : "#077BC1",
+                  borderRadius: "4px",
+                }}
               />
+              <Stack
+                direction="row"
+                alignItems="center"
+                justifyContent={
+                  otpErr.length > 0 ? "space-between" : "flex-end"
+                }
+              >
+                {otpErr.length > 0 && (
+                  <small style={{ color: "red" }}>{otpErr}</small>
+                )}
+                {showTimer ? (
+                  <TimerDisplay
+                    setShowTimer={setShowTimer}
+                    timerValue={timerValue}
+                  />
+                ) : (
+                  <Button
+                    size="small"
+                    sx={{ textTransform: "capitalize" }}
+                    onClick={handleRequestOtp}
+                    disabled={otpCount >= 4}
+                  >
+                    Resend OTP
+                  </Button>
+                )}
+              </Stack>
             </Stack>
             <Stack>
-              <Button variant="contained" type="submit">
+              <Button variant="contained" size="large" type="submit">
                 SIGN IN
               </Button>
             </Stack>
