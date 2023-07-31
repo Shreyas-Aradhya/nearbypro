@@ -3,6 +3,7 @@ import Homepage from "./pages/Home/Homepage";
 import CategoryPage from "./pages/Home/CategoryPage";
 import SigninPage from "./pages/SigninPage/SigninPage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
+import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import AuthGuard from "./gaurds/AuthGuard";
 import GuestGuard from "./gaurds/GuestGuard";
 
@@ -31,19 +32,20 @@ function App() {
               </GuestGuard>
             }
           />
-          {/* <Route
-          path="/register"
-          element={
-            <GuestGuard>
-              <RegisterPage />
-            </GuestGuard>
-          }
-        /> */}
+          <Route
+            path="/register"
+            element={
+              <GuestGuard>
+                <RegisterPage />
+              </GuestGuard>
+            }
+          />
           <Route
             path="/profile"
             element={
               <AuthGuard>
-                <RegisterPage isEdit={true} />
+                {/* <RegisterPage isEdit={true} /> */}
+                <ProfilePage isEdit={true} />
               </AuthGuard>
             }
           ></Route>

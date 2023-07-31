@@ -1,0 +1,100 @@
+.register-icon-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.confirm-text {
+  padding: 0px 10px;
+}
+
+.profile-group {
+  width: 120px;
+  height: 120px;
+  position: relative;
+}
+
+.profile-image-container {
+  overflow: hidden;
+  width: 120px;
+  height: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+}
+
+.edit-icon-btn {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background-image: url("/img/edit-icon.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.country-code-container {
+  display: flex;
+  align-items: center;
+  margin-right: 30px;
+}
+
+.country-code-img {
+  width: 30px;
+}
+
+.country-code-txt {
+  padding: 0px 10px;
+  border-right: 1px solid #171112;
+}
+
+.radio-label h4 {
+  font-size: 1.5rem;
+}
+.group-sub-heading {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
+
+.info-box {
+  display: flex;
+  align-items: start;
+}
+.info-box .info-icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+  margin-top: 5px;
+}
+
+.info-box .info-txt {
+  flex: 1;
+}
+
+.file-input-container {
+  width: 100px;
+  height: 100px;
+  box-shadow: 0px 0px 6px #00000029;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.custom-file-input {
+  display: none;
+}
+
+@media (max-width: 600px) {
+  .confirm-text {
+    font-size: 0.8rem;
+  }
+}

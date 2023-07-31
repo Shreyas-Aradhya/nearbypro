@@ -80,6 +80,11 @@ const SigninForm = () => {
     }
   };
 
+  const handleNumberChange = () => {
+    setOtpSent(false);
+    setOtp("");
+  };
+
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
@@ -104,11 +109,22 @@ const SigninForm = () => {
             helperText={mobileNumberErr}
             sx={{ ...textfieldStyles }}
             variant="outlined"
-            size="small"
+            disabled={otpSent}
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
                   <CountryCode />
+                </InputAdornment>
+              ),
+              endAdornment: otpSent && (
+                <InputAdornment position="end">
+                  <Button
+                    size="small"
+                    onClick={handleNumberChange}
+                    sx={{ textTransform: "capitalize" }}
+                  >
+                    change number
+                  </Button>
                 </InputAdornment>
               ),
             }}
@@ -118,7 +134,7 @@ const SigninForm = () => {
         </Stack>
         {!otpSent && (
           <Stack>
-            <Button variant="contained" onClick={handleRequestOtp}>
+            <Button variant="contained" size="large" onClick={handleRequestOtp}>
               Request OTP
             </Button>
           </Stack>
