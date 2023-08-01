@@ -2,7 +2,7 @@ import styles from "./RegisterForm.module.css";
 import profileImg from "/img/profile-icon.png";
 import indiaFlag from "/img/india-flag-icon.png";
 
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 
 // mui
 import Box from "@mui/material/Box";
@@ -69,6 +69,21 @@ const ProfileForm = () => {
   const [whatsApp, setWhatsApp] = useState(
     user?.whatsApp === true ? "yes" : "no" || "yes"
   );
+
+  useEffect(() => {
+    if (user?.name) {
+      setName(user.name);
+    }
+    if (user?.email) {
+      setEmail(user.email);
+    }
+    if (user?.mobile) {
+      setMobileNumber(user.mobile);
+    }
+    if (user?.whatsApp) {
+      setWhatsApp(user.whatsApp);
+    }
+  }, [user]);
 
   const [isLoading, setIsLoading] = useState(false);
 

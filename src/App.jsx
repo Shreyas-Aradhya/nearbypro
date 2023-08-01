@@ -6,6 +6,7 @@ import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import AuthGuard from "./gaurds/AuthGuard";
 import GuestGuard from "./gaurds/GuestGuard";
+import RegisterGaurd from "./gaurds/RegisterGaurd";
 
 import { Route, Routes } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
@@ -35,9 +36,9 @@ function App() {
           <Route
             path="/register"
             element={
-              <GuestGuard>
+              <RegisterGaurd>
                 <RegisterPage />
-              </GuestGuard>
+              </RegisterGaurd>
             }
           />
           <Route
