@@ -15,6 +15,7 @@ import { SnackbarProvider } from "notistack";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import ProfileGaurd from "./gaurds/ProfileGaurd";
 
 function App() {
   return (
@@ -45,8 +46,9 @@ function App() {
             path="/profile"
             element={
               <AuthGuard>
-                {/* <RegisterPage isEdit={true} /> */}
-                <ProfilePage isEdit={true} />
+                <ProfileGaurd>
+                  <ProfilePage isEdit={true} />
+                </ProfileGaurd>
               </AuthGuard>
             }
           ></Route>

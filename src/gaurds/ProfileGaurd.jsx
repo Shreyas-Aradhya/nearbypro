@@ -5,15 +5,15 @@ import useAuth from "../hooks/useAuth";
 
 // ----------------------------------------------------------------------
 
-RegisterGaurd.propTypes = {
+ProfileGaurd.propTypes = {
   children: PropTypes.node,
 };
 
-export default function RegisterGaurd({ children }) {
+export default function ProfileGaurd({ children }) {
   const { user, vendor } = useAuth();
   // if (user?.is_registered && vendor?.business?.bname) {
-  if (user?.is_registered && vendor?.bname) {
-    return <Navigate to={"/profile"} />;
+  if (!user?.is_registered) {
+    return <Navigate to={"/register"} />;
   }
 
   // if (user?.is_registered && !vendor?.bname) {

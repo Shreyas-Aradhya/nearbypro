@@ -5,6 +5,8 @@ import styles from "./SigninPage.module.css";
 
 import { Helmet } from "react-helmet-async";
 
+import { Link } from "react-router-dom";
+
 const SigninPage = () => {
   return (
     <>
@@ -23,6 +25,9 @@ const SigninPage = () => {
         <div className={styles["signin-form-container"]}>
           <div className={styles["signin-form-wrapper"]}>
             <div className={styles["form-header"]}>
+              {/* <Link to="/">
+                <button className="close-btn"></button>
+              </Link> */}
               <div className={styles["form-title-container"]}>
                 <h1 className={styles["form-title"]}>Sign In</h1>
                 <div className={styles["blue-dot"]}></div>

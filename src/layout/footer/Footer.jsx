@@ -9,7 +9,7 @@ const Footer = () => {
       <div className="container">
         <div className={styles["footer-container"]}>
           <p className={styles["copyright-text"]}>
-            All rights reserved &copy; 2013neadrby.com
+            All rights reserved &copy; {new Date().getFullYear()} localpro.com
           </p>
           <ul className={styles["socials-list"]}>
             <li className={styles["social-item"]}>

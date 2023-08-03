@@ -60,14 +60,14 @@ const FileInput = ({ handleImgUpload }) => {
   );
 };
 
-const ProfileForm = () => {
+const ProfileForm = ({ setCurrForm }) => {
   const { user, updateProfile } = useContext(AuthContext);
 
   const [name, setName] = useState(user?.name || "");
   const [email, setEmail] = useState(user?.email || "");
   const [mobileNumber, setMobileNumber] = useState(user?.mobile || "");
   const [whatsApp, setWhatsApp] = useState(
-    user?.whatsApp === true ? "yes" : "no" || "yes"
+    user?.whatsApp === true ? "yes" : "no" || "no"
   );
 
   useEffect(() => {
@@ -81,7 +81,7 @@ const ProfileForm = () => {
       setMobileNumber(user.mobile);
     }
     if (user?.whatsApp) {
-      setWhatsApp(user.whatsApp);
+      setWhatsApp(user.whatsApp === true ? "yes" : "no");
     }
   }, [user]);
 
@@ -105,6 +105,7 @@ const ProfileForm = () => {
     e.preventDefault();
     const data = {
       name,
+      email,
       mobile: mobileNumber,
       whatsApp: whatsApp === "yes" ? true : false,
       profilePicture: typeof profilePic === "string" ? profilePic : null,
@@ -114,6 +115,7 @@ const ProfileForm = () => {
       await updateProfile(data);
       enqueueSnackbar("Profile updated successfully!", { variant: "success" });
       setIsLoading(false);
+      setCurrForm((prev) => prev + 1);
     } catch (error) {
       setIsLoading(false);
       enqueueSnackbar("Failed to update!, Please try again later", {
@@ -126,10 +128,15 @@ const ProfileForm = () => {
   return (
     <form onSubmit={handleProfileUpdate}>
       <Stack
-        alignItems={"center"}
-        sx={{ maxWidth: { xs: "350px", sm: "450px", md: "600px" }, mx: "auto" }}
+        alignItems={"start"}
+        sx={{
+          width: "100%",
+          maxWidth: { xs: "350px", sm: "450px" },
+          mx: "auto",
+        }}
         spacing={3}
       >
+        <h1 className={styles["form-title"]}>Fill Your Personal Details</h1>
         <div className={styles["register-icon-container"]}>
           <div className={styles["profile-group"]}>
             <div className={styles["profile-image-container"]}>
@@ -150,6 +157,7 @@ const ProfileForm = () => {
             variant="outlined"
             value={name}
             onChange={(e) => setName(e.target.value)}
+            required
           />
         </Stack>
         <Stack spacing={1} sx={{ width: "100%" }}>
@@ -202,8 +210,28 @@ const ProfileForm = () => {
                     value="yes"
                     control={<Radio />}
                     label="Yes"
+                    sx={{
+                      "& .MuiFormControlLabel-label": {
+                        fontSize: { xs: "0.8rem", md: "1rem" },
+                      },
+                      "& .MuiRadio-root": {
+                        width: "30px",
+                      },
+                    }}
                   />
-                  <FormControlLabel value="no" control={<Radio />} label="No" />
+                  <FormControlLabel
+                    value="no"
+                    control={<Radio />}
+                    label="No"
+                    sx={{
+                      "& .MuiFormControlLabel-label": {
+                        fontSize: { xs: "0.8rem", md: "1rem" },
+                      },
+                      "& .MuiRadio-root": {
+                        width: "30px",
+                      },
+                    }}
+                  />
                 </RadioGroup>
               </Stack>
             </FormGroup>

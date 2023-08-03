@@ -93,8 +93,83 @@
   display: none;
 }
 
+.form-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+}
+
+.back-icon-btn {
+  width: 40px;
+  height: 40px;
+  padding: 10px;
+  background-color: #939393;
+  border-radius: 50%;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: -15%;
+  cursor: pointer;
+  z-index: 99999999999;
+}
+
+.success-page-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+}
+
+.success_msg_container {
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.success_img {
+  width: 150px;
+  margin-bottom: 30px;
+}
+
+.success_msg {
+  font-size: 2.2rem;
+}
+
+.profile-link {
+  text-decoration: underline;
+  font-size: 1.8rem;
+}
+
 @media (max-width: 600px) {
   .confirm-text {
     font-size: 0.8rem;
+  }
+  .form-title {
+    font-size: 1.5rem;
+  }
+  .back-icon-btn {
+    position: static;
+    transform: translateY(0%);
+    width: 20px;
+    height: 20px;
+    padding: 5px;
+  }
+
+  .success_img {
+    width: 100px;
+    margin-bottom: 30px;
+  }
+
+  .success_msg {
+    font-size: 2rem;
+  }
+
+  .success_msg_container {
+    min-height: 50vh;
   }
 }
