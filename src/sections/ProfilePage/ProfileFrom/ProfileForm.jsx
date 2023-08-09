@@ -7,7 +7,7 @@ import searchIcon from "/icons/search-icon.svg";
 import profileImg from "/img/profile-icon.png";
 import indiaFlag from "/img/india-flag-icon.png";
 
-import { useState, useEffect, useContext, useRef } from "react";
+import { useState, useEffect, useContext, useRef, useMemo } from "react";
 
 // mui
 import Box from "@mui/material/Box";
@@ -34,6 +34,7 @@ import { enqueueSnackbar } from "notistack";
 import { AuthContext } from "../../../contexts/AuthContext";
 import s3ImageUpload from "../../../services/s3ImageUpload";
 import getSubCategories from "../../../services/getSubCategories";
+import PlacesAutocomplete from "../../../components/Map/PlacesAutocomplete";
 
 const textfieldStyles = {
   "& .MuiOutlinedInput-notchedOutline": {
@@ -127,9 +128,10 @@ const ProfileForm = () => {
   const [bname, setBname] = useState(vendor?.business?.bname || "");
   const [bwebsite, setBwebsite] = useState(vendor?.business?.bwebsite || "");
   const [blocation, setBlocation] = useState(vendor?.business?.blocation || "");
+  const [blocality, setBlocality] = useState(vendor?.business?.blocality || "");
+  const currLocality = useMemo(() => ({ ...blocality }), []);
   const [btype, setBtype] = useState(vendor?.business?.btype || "individual");
   const [babout, setBabout] = useState(vendor?.business?.babout || "");
-
   const [files, setFiles] = useState(vendor?.business?.bphotos || []);
 
   const [isLoading, setIsLoading] = useState(false);
@@ -175,6 +177,10 @@ const ProfileForm = () => {
     setSelectedCategories((prev) => prev?.filter((cat) => cat?.id !== catId));
   };
 
+  const handleLocalitySelect = (locality) => {
+    setBlocality(locality);
+  };
+
   const handleImgUpload = async (data) => {
     try {
       const url = await s3ImageUpload(data);
@@ -197,6 +203,7 @@ const ProfileForm = () => {
         bname,
         bwebsite,
         blocation,
+        blocality,
         btype,
         babout,
         bphotos: files,
@@ -355,6 +362,15 @@ const ProfileForm = () => {
                   variant="outlined"
                   value={blocation}
                   onChange={(e) => setBlocation(e.target.value)}
+                />
+              </Stack>
+            </div>
+            <div className={styles["form-group"]}>
+              <Stack spacing={1} sx={{ mb: 3 }}>
+                <label htmlFor="locality">Locality</label>
+                <PlacesAutocomplete
+                  getLocData={handleLocalitySelect}
+                  currData={currLocality}
                 />
               </Stack>
             </div>

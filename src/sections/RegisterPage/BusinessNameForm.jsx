@@ -20,6 +20,8 @@ import CircularProgress from "@mui/material/CircularProgress";
 import { enqueueSnackbar } from "notistack";
 
 import { AuthContext } from "../../contexts/AuthContext";
+import Map from "../../components/Map/Map";
+import PlacesAutocomplete from "../../components/Map/PlacesAutocomplete";
 
 const textfieldStyles = {
   "& .MuiOutlinedInput-notchedOutline": {
@@ -36,8 +38,13 @@ const BusinessNameForm = ({ setCurrForm }) => {
   const [bname, setBname] = useState(vendor?.business?.bname || "");
   const [bwebsite, setBwebsite] = useState(vendor?.business?.bwebsite || "");
   const [blocation, setBlocation] = useState(vendor?.business?.blocation || "");
+  const [blocality, setBlocality] = useState(vendor?.business?.blocality || "");
 
   const [isLoading, setIsLoading] = useState(false);
+
+  const handleLocalitySelect = (locality) => {
+    setBlocality(locality);
+  };
 
   const handleVendorRegister = async (e) => {
     e.preventDefault();
@@ -46,6 +53,7 @@ const BusinessNameForm = ({ setCurrForm }) => {
         bname,
         bwebsite,
         blocation,
+        blocality,
       },
     };
     try {
@@ -95,7 +103,7 @@ const BusinessNameForm = ({ setCurrForm }) => {
           <h1 className={styles["form-title"]}>Business Name & Address</h1>
         </Stack>
         <Stack spacing={1} sx={{ width: "100%" }}>
-          <label htmlFor="bname">Enter Your Business Name</label>
+          <label htmlFor="bname">Company / Store Name</label>
           <TextField
             id="bname"
             sx={{ ...textfieldStyles }}
@@ -106,7 +114,7 @@ const BusinessNameForm = ({ setCurrForm }) => {
           />
         </Stack>
         <Stack spacing={1} sx={{ width: "100%" }}>
-          <label htmlFor="website">Enter Your Business Website</label>
+          <label htmlFor="website">Business Website</label>
           <TextField
             id="website"
             sx={{ ...textfieldStyles }}
@@ -116,7 +124,7 @@ const BusinessNameForm = ({ setCurrForm }) => {
           />
         </Stack>
         <Stack spacing={1} sx={{ width: "100%" }}>
-          <label htmlFor="location">Enter Your Business Location</label>
+          <label htmlFor="location">Business Address</label>
           <TextField
             id="location"
             sx={{ ...textfieldStyles }}
@@ -124,6 +132,10 @@ const BusinessNameForm = ({ setCurrForm }) => {
             value={blocation}
             onChange={(e) => setBlocation(e.target.value)}
           />
+        </Stack>
+        <Stack spacing={1} sx={{ width: "100%" }}>
+          <label htmlFor="locality">Locality</label>
+          <PlacesAutocomplete getLocData={handleLocalitySelect} />
         </Stack>
         <Button fullWidth type="submit" variant="contained" size="large">
           {isLoading ? (
