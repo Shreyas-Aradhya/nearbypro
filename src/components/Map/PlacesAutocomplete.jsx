@@ -61,9 +61,12 @@ const PlacesInput = ({ setSelected, getLocData, currData }) => {
 };
 
 function Map({ getLocData, currData }) {
+  console.log(currData);
   const mapCenter = useMemo(() => ({ lat: 12.958, lng: 77.6 }), []);
   const [selected, setSelected] = useState(
-    { lat: currData?.lat, lng: currData?.lng } || null
+    Object.keys(currData).length > 0
+      ? { lat: currData?.lat, lng: currData?.lng }
+      : null
   );
   return (
     <Stack spacing={1} sx={{ width: "100%" }}>
