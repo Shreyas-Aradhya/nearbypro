@@ -61,7 +61,6 @@ const PlacesInput = ({ setSelected, getLocData, currData }) => {
 };
 
 function Map({ getLocData, currData }) {
-  console.log(currData);
   const mapCenter = useMemo(() => ({ lat: 12.958, lng: 77.6 }), []);
   const [selected, setSelected] = useState(
     Object.keys(currData).length > 0

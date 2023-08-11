@@ -206,7 +206,6 @@ function AuthProvider({ children }) {
         };
         const response = await axios.request(config);
         const { user } = response.data;
-
         dispatch({
           type: "UPDATE_PROFILE",
           payload: {

@@ -123,7 +123,8 @@ const ProfileForm = () => {
     getData();
   }, []);
 
-  const { user, vendor, updateBusiness } = useContext(AuthContext);
+  const { user, updateProfile, vendor, updateBusiness } =
+    useContext(AuthContext);
 
   const [bname, setBname] = useState(vendor?.business?.bname || "");
   const [bwebsite, setBwebsite] = useState(vendor?.business?.bwebsite || "");
@@ -143,6 +144,7 @@ const ProfileForm = () => {
   );
 
   const [name, setName] = useState(user?.name || "");
+  const [email, setEmail] = useState(user?.email || "");
   const [mobileNumber, setMobileNumber] = useState(user?.mobile || "");
   const [whatsApp, setWhatsApp] = useState(
     user?.whatsApp === true ? "yes" : "no" || "yes"
@@ -159,6 +161,29 @@ const ProfileForm = () => {
       console.log(url);
       setProfilePic(url);
     } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleProfileUpdate = async (e) => {
+    e.preventDefault();
+    const data = {
+      name,
+      email,
+      mobile: mobileNumber,
+      whatsApp: whatsApp === "yes" ? true : false,
+      profilePicture: typeof profilePic === "string" ? profilePic : null,
+    };
+    try {
+      setIsLoading(true);
+      await updateProfile(data);
+      enqueueSnackbar("Profile updated successfully!", { variant: "success" });
+      setIsLoading(false);
+    } catch (error) {
+      setIsLoading(false);
+      enqueueSnackbar("Failed to update!, Please try again later", {
+        variant: "error",
+      });
       console.log(error);
     }
   };
@@ -234,11 +259,14 @@ const ProfileForm = () => {
         borderRadius: "10px",
       }}
     >
-      <form onSubmit={handleVendorRegister}>
+      <form onSubmit={handleProfileUpdate}>
         <div className={styles["form-wrapper"]}>
           {/*  */}
 
-          <div className={styles["form-section"]} style={{ paddingTop: 0 }}>
+          <div
+            className={styles["form-section"]}
+            style={{ paddingTop: 0, paddingBottom: "20px" }}
+          >
             <h2 className={styles["form-group-heading"]}>Profile Details</h2>
             <div className={styles["register-icon-container"]}>
               <div className={styles["profile-group"]}>
@@ -263,6 +291,19 @@ const ProfileForm = () => {
                   variant="outlined"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
+                />
+              </Stack>
+            </div>
+            <div className={styles["form-group"]}>
+              <Stack spacing={1} sx={{ mb: 3 }}>
+                <label htmlFor="email">Email</label>
+                <TextField
+                  id="email"
+                  sx={{ ...textfieldStyles }}
+                  variant="outlined"
+                  value={email}
+                  type="email"
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </Stack>
             </div>
@@ -321,7 +362,24 @@ const ProfileForm = () => {
               </Stack>
             </div>
           </div>
+
+          <Stack alignItems={"center"} sx={{ mb: 4 }}>
+            <Button
+              variant="contained"
+              type="submit"
+              sx={{ padding: "20px 200px" }}
+              size="large"
+            >
+              {isLoading ? (
+                <CircularProgress size={20} color="inherit" />
+              ) : (
+                "update"
+              )}
+            </Button>
+          </Stack>
         </div>
+      </form>
+      <form onSubmit={handleVendorRegister}>
         <div className={styles["form-wrapper"]}>
           {/*  */}
 
