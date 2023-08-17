@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+
 import Navbar from "../../layout/nav/Navbar";
 
 import SigninForm from "../../sections/SigninPage/SigninForm/SigninForm";
@@ -8,6 +10,9 @@ import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 
 const SigninPage = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <>
       <Helmet>

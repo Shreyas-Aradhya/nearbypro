@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import Navbar from "../../layout/nav/Navbar";
 
 import HeroBanner from "../../sections/HomePage/HeroBanner/HeroBanner";
@@ -8,13 +9,31 @@ import StatsWidget from "../../sections/HomePage/StatsWidget/StatsWidget";
 import TwoColumnAbout from "../../sections/HomePage/TwoColumnAbout/TwoColumnAbout";
 import SubCategoriesWidget from "../../sections/HomePage/ServicesWidget/SubCategoriesWidget";
 
+import getCategories from "../../services/getCategories";
+
 import { useParams, useLocation } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 
 const CategoryPage = () => {
   const location = useLocation();
   let { name } = useParams();
-  console.log(location?.state);
+
+  const [subCategories, setSubCategories] = useState([]);
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const data = await getCategories({ parent: location?.state?.id });
+        setSubCategories(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getData();
+  }, []);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <div>
       <Helmet>
@@ -28,14 +47,20 @@ const CategoryPage = () => {
         <header className="nav-header">
           <Navbar />
         </header>
-        <HeroBanner title={name} banner={location?.state?.banner} />
+        <HeroBanner
+          title={name}
+          description={location?.state?.metaDescription}
+          banner={location?.state?.banner[0]?.url}
+        />
       </div>
       <StatsWidget />
       {!name && <ServicesWidget />}
-      {location?.state?.subCategories?.length > 0 && (
-        <SubCategoriesWidget subCategories={location?.state?.subCategories} />
+      {subCategories?.length > 0 && (
+        <SubCategoriesWidget subCategories={subCategories} />
       )}
-      <TwoColumnAbout />
+      {location?.state?.sections && location?.state?.sections.length > 0 && (
+        <TwoColumnAbout sections={location?.state?.sections} />
+      )}
       <OurTeamWidget />
       <RegisterWidget />
     </div>

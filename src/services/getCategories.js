@@ -1,11 +1,17 @@
 import axios from "../utils/axios";
 
-const getCategories = async (offset = 0, limit = 11) => {
+const getCategories = async ({ offset = 0, limit = 11, parent = null }) => {
   try {
-    let data = JSON.stringify({
+    const filters = {
       offset: offset,
       limit: limit,
-    });
+    };
+
+    if (parent) {
+      filters.parent = parent;
+    }
+
+    let data = JSON.stringify(filters);
 
     let config = {
       method: "post",

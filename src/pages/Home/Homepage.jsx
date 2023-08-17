@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+
 import Navbar from "../../layout/nav/Navbar";
 import HeroBanner from "../../sections/HomePage/HeroBanner/HeroBanner";
 import OurTeamWidget from "../../sections/HomePage/OurTeamWidget/OurTeamWidget";
@@ -9,6 +11,9 @@ import TwoColumnAbout from "../../sections/HomePage/TwoColumnAbout/TwoColumnAbou
 import { Helmet } from "react-helmet-async";
 
 const Homepage = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <div>
       <Helmet>

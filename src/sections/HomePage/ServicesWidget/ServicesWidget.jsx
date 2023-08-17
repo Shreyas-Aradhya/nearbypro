@@ -7,17 +7,18 @@ import { Link } from "react-router-dom";
 import getCategories from "../../../services/getCategories";
 
 const ServiceItem = ({
+  id,
   icon,
   title,
-  subCategories,
   banner,
   metaTitle,
   metaDescription,
+  sections,
 }) => {
   return (
     <Link
       to={`/category/${title}`}
-      state={{ subCategories, banner, metaTitle, metaDescription }}
+      state={{ banner, metaTitle, metaDescription, id, sections }}
     >
       <div className={styles["service-item"]}>
         <div className={styles["service-icon-container"]}>
@@ -35,7 +36,7 @@ const ServicesWidget = () => {
   useEffect(() => {
     const getData = async () => {
       try {
-        const data = await getCategories();
+        const data = await getCategories({});
         setCategories(data);
       } catch (error) {
         console.log(error);
@@ -53,8 +54,9 @@ const ServicesWidget = () => {
               key={index}
               title={category?.name}
               icon={category?.image}
-              subCategories={category?.subCategory}
+              id={category?.id}
               banner={category?.banner}
+              sections={category?.sections}
               metaTitle={category?.meta_title}
               metaDescription={category?.meta_description}
             />
