@@ -79,7 +79,11 @@ function Map({ getLocData, currData }) {
         center={selected || mapCenter}
         mapContainerClassName="google-map-container"
       >
-        <MarkerF position={selected || mapCenter} />
+        <MarkerF
+          position={selected || mapCenter}
+          draggable
+          onPositionChanged={(e) => console.log(e)}
+        />
       </GoogleMap>
     </Stack>
   );

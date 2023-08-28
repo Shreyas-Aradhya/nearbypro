@@ -1,8 +1,10 @@
 import styles from "./RegisterForm.module.css";
 import profileImg from "/img/profile-icon.png";
 import indiaFlag from "/img/india-flag-icon.png";
+import back_icon from "/icons/back-icon.svg";
 
 import { useState, useContext, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 // mui
 import Box from "@mui/material/Box";
@@ -136,7 +138,24 @@ const ProfileForm = ({ setCurrForm }) => {
         }}
         spacing={3}
       >
-        <h1 className={styles["form-title"]}>Fill Your Personal Details</h1>
+        <Stack
+          direction="row"
+          spacing={{ xs: 2, md: 0 }}
+          alignItems={"center"}
+          sx={{ position: "relative" }}
+        >
+          <Link
+            to="/"
+            className={`mobile-only flex ${styles["back-icon-btn"]}`}
+          >
+            <img
+              src={back_icon}
+              alt="back btn"
+              className={styles["back-icon"]}
+            />
+          </Link>
+          <h1 className={styles["form-title"]}>Fill Your Personal Details</h1>
+        </Stack>
         <div className={styles["register-icon-container"]}>
           <div className={styles["profile-group"]}>
             <div className={styles["profile-image-container"]}>
@@ -153,6 +172,7 @@ const ProfileForm = ({ setCurrForm }) => {
           <label htmlFor="name">Full Name</label>
           <TextField
             id="name"
+            placeholder="eg: John Doe"
             sx={{ ...textfieldStyles }}
             variant="outlined"
             value={name}
@@ -164,6 +184,7 @@ const ProfileForm = ({ setCurrForm }) => {
           <label htmlFor="email">Email Id</label>
           <TextField
             id="email"
+            placeholder="eg: user@example.com"
             sx={{ ...textfieldStyles }}
             variant="outlined"
             value={email}
@@ -176,6 +197,7 @@ const ProfileForm = ({ setCurrForm }) => {
             <TextField
               fullWidth
               id="mobile-number"
+              placeholder="eg: 9876543210"
               sx={{ ...textfieldStyles }}
               variant="outlined"
               value={mobileNumber}

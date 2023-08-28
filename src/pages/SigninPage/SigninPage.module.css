@@ -3,7 +3,23 @@
   width: 100%;
   height: calc(100vh);
 }
-
+.back-icon-btn {
+  width: 30px;
+  height: 30px;
+  padding: 5px;
+  background-color: #939393;
+  border-radius: 50%;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.back-button-container {
+  position: absolute;
+  top: 25vh;
+  left: 10vw;
+}
 .signin-img-container {
   background-image: url("/img/signin.png");
   background-position: center;

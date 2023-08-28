@@ -107,6 +107,7 @@ const SigninForm = () => {
           <label htmlFor="mobile-number">Mobile Number</label>
           <TextField
             id="mobile-number"
+            placeholder="eg: 9876543210"
             error={mobileNumberErr.length > 0}
             helperText={mobileNumberErr}
             sx={{ ...textfieldStyles }}
@@ -190,7 +191,10 @@ const SigninForm = () => {
                 )}
               </Stack>
             </Stack>
-            <Stack>
+            <Stack spacing={2}>
+              <small>
+                *By continuing you agree to our terms and conditions
+              </small>
               <Button variant="contained" size="large" type="submit">
                 SIGN IN
               </Button>

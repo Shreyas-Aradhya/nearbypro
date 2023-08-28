@@ -287,6 +287,7 @@ const ProfileForm = () => {
                 <label htmlFor="name">Name</label>
                 <TextField
                   id="name"
+                  placeholder="eg: John Doe"
                   sx={{ ...textfieldStyles }}
                   variant="outlined"
                   value={name}
@@ -299,6 +300,7 @@ const ProfileForm = () => {
                 <label htmlFor="email">Email</label>
                 <TextField
                   id="email"
+                  placeholder="eg: user@example.com"
                   sx={{ ...textfieldStyles }}
                   variant="outlined"
                   value={email}
@@ -314,6 +316,7 @@ const ProfileForm = () => {
                   <TextField
                     fullWidth
                     id="mobile-number"
+                    placeholder="eg: 9876543210"
                     sx={{ ...textfieldStyles }}
                     variant="outlined"
                     value={mobileNumber}
@@ -392,6 +395,7 @@ const ProfileForm = () => {
                 <label htmlFor="bname">Enter Your Business Name</label>
                 <TextField
                   id="bname"
+                  placeholder="eg: XYZ Enterprises"
                   sx={{ ...textfieldStyles }}
                   variant="outlined"
                   value={bname}
@@ -404,6 +408,7 @@ const ProfileForm = () => {
                 <label htmlFor="website">Enter Your Business Website</label>
                 <TextField
                   id="website"
+                  placeholder="eg: www.xyz.com"
                   sx={{ ...textfieldStyles }}
                   variant="outlined"
                   value={bwebsite}
@@ -416,6 +421,7 @@ const ProfileForm = () => {
                 <label htmlFor="location">Enter Your Business Location</label>
                 <TextField
                   id="location"
+                  placeholder="eg: #45, 3rd Main, 5th Cross, Jp Nagar, Bangalore"
                   sx={{ ...textfieldStyles }}
                   variant="outlined"
                   value={blocation}
@@ -543,6 +549,7 @@ const ProfileForm = () => {
                     }}
                     renderInput={(params) => (
                       <TextField
+                        placeholder="eg: Plumber"
                         sx={{ ...textfieldStyles }}
                         fullWidth
                         variant="outlined"
@@ -613,6 +620,7 @@ const ProfileForm = () => {
                 <label htmlFor="about">Write About Your Business</label>
                 <TextField
                   id="about"
+                  placeholder="eg: XYZ business specializes in abc works..."
                   sx={{ ...textfieldStyles }}
                   variant="outlined"
                   multiline
