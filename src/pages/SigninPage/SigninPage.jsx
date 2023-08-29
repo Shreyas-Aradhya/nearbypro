@@ -43,6 +43,15 @@ const SigninPage = () => {
               {/* <Link to="/">
                 <button className="close-btn"></button>
               </Link> */}
+              <div className={`mobile-only ${styles["back-button-container"]}`}>
+                <Link to="/" className={styles["back-icon-btn"]}>
+                  <img
+                    src={back_icon}
+                    alt="back btn"
+                    className={styles["back-icon"]}
+                  />
+                </Link>
+              </div>
               <div className={styles["form-title-container"]}>
                 <h1 className={styles["form-title"]}>Signin / Signup</h1>
                 <div className={styles["blue-dot"]}></div>

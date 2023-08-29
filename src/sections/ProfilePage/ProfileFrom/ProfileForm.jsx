@@ -130,7 +130,7 @@ const ProfileForm = () => {
   const [bwebsite, setBwebsite] = useState(vendor?.business?.bwebsite || "");
   const [blocation, setBlocation] = useState(vendor?.business?.blocation || "");
   const [blocality, setBlocality] = useState(vendor?.business?.blocality || "");
-  const currLocality = useMemo(() => ({ ...blocality }), []);
+  const currLocality = useMemo(() => ({ ...blocality }), [blocality]);
   const [btype, setBtype] = useState(vendor?.business?.btype || "individual");
   const [babout, setBabout] = useState(vendor?.business?.babout || "");
   const [files, setFiles] = useState(vendor?.business?.bphotos || []);
@@ -259,129 +259,131 @@ const ProfileForm = () => {
         borderRadius: "10px",
       }}
     >
-      <form onSubmit={handleProfileUpdate}>
-        <div className={styles["form-wrapper"]}>
-          {/*  */}
+      <Box sx={{ mb: "80px" }}>
+        <form onSubmit={handleProfileUpdate}>
+          <div className={styles["form-wrapper"]}>
+            {/*  */}
 
-          <div
-            className={styles["form-section"]}
-            style={{ paddingTop: 0, paddingBottom: "20px" }}
-          >
-            <h2 className={styles["form-group-heading"]}>Profile Details</h2>
-            <div className={styles["register-icon-container"]}>
-              <div className={styles["profile-group"]}>
-                <div className={styles["profile-image-container"]}>
-                  <img
-                    src={profilePic}
-                    alt="profile image"
-                    className={styles["register-icon"]}
+            <div
+              className={styles["form-section"]}
+              style={{ paddingTop: 0, paddingBottom: "20px" }}
+            >
+              <h2 className={styles["form-group-heading"]}>Profile Details</h2>
+              <div className={styles["register-icon-container"]}>
+                <div className={styles["profile-group"]}>
+                  <div className={styles["profile-image-container"]}>
+                    <img
+                      src={profilePic}
+                      alt="profile image"
+                      className={styles["register-icon"]}
+                    />
+                  </div>
+                  <ProfilePictureInput
+                    handleProfilePicUpload={handleProfilePicUpload}
                   />
                 </div>
-                <ProfilePictureInput
-                  handleProfilePicUpload={handleProfilePicUpload}
-                />
               </div>
-            </div>
-            <div className={styles["form-group"]}>
-              <Stack spacing={1} sx={{ mb: 3 }}>
-                <label htmlFor="name">Name</label>
-                <TextField
-                  id="name"
-                  placeholder="eg: John Doe"
-                  sx={{ ...textfieldStyles }}
-                  variant="outlined"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                />
-              </Stack>
-            </div>
-            <div className={styles["form-group"]}>
-              <Stack spacing={1} sx={{ mb: 3 }}>
-                <label htmlFor="email">Email</label>
-                <TextField
-                  id="email"
-                  placeholder="eg: user@example.com"
-                  sx={{ ...textfieldStyles }}
-                  variant="outlined"
-                  value={email}
-                  type="email"
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-              </Stack>
-            </div>
-            <div className={styles["form-group"]}>
-              <Stack spacing={1} sx={{ mb: 3 }}>
-                <label htmlFor="mobile-number">Mobile Number</label>
-                <Box>
+              <div className={styles["form-group"]}>
+                <Stack spacing={1} sx={{ mb: 3 }}>
+                  <label htmlFor="name">Full Name</label>
                   <TextField
-                    fullWidth
-                    id="mobile-number"
-                    placeholder="eg: 9876543210"
+                    id="name"
+                    placeholder="Enter your full name"
                     sx={{ ...textfieldStyles }}
                     variant="outlined"
-                    value={mobileNumber}
-                    onChange={(e) => setMobileNumber(e.target.value)}
-                    InputProps={{
-                      startAdornment: (
-                        <InputAdornment position="start">
-                          <CountryCode />
-                        </InputAdornment>
-                      ),
-                    }}
-                    disabled
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
                   />
-                  <FormGroup
-                    sx={{ border: "1px solid #077BC1", borderTop: "none" }}
-                  >
-                    <Stack
-                      direction={"row"}
-                      justifyContent={"space-between"}
-                      alignItems={"center"}
+                </Stack>
+              </div>
+              <div className={styles["form-group"]}>
+                <Stack spacing={1} sx={{ mb: 3 }}>
+                  <label htmlFor="email">Email Address</label>
+                  <TextField
+                    id="email"
+                    placeholder="Enter your email address"
+                    sx={{ ...textfieldStyles }}
+                    variant="outlined"
+                    value={email}
+                    type="email"
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                </Stack>
+              </div>
+              <div className={styles["form-group"]}>
+                <Stack spacing={1} sx={{ mb: 3 }}>
+                  <label htmlFor="mobile-number">Mobile Number</label>
+                  <Box>
+                    <TextField
+                      fullWidth
+                      id="mobile-number"
+                      placeholder="Enter your mobile number"
+                      sx={{ ...textfieldStyles }}
+                      variant="outlined"
+                      value={mobileNumber}
+                      onChange={(e) => setMobileNumber(e.target.value)}
+                      InputProps={{
+                        startAdornment: (
+                          <InputAdornment position="start">
+                            <CountryCode />
+                          </InputAdornment>
+                        ),
+                      }}
+                      disabled
+                    />
+                    <FormGroup
+                      sx={{ border: "1px solid #077BC1", borderTop: "none" }}
                     >
-                      <p style={{ paddingLeft: "10px" }}>
-                        Is this your WhatsApp number?
-                      </p>
-                      <RadioGroup
-                        row
-                        aria-labelledby="demo-row-radio-buttons-group-label"
-                        name="row-radio-buttons-group"
-                        value={whatsApp}
-                        onChange={(e) => setWhatsApp(e.target.value)}
+                      <Stack
+                        direction={"row"}
+                        justifyContent={"space-between"}
+                        alignItems={"center"}
                       >
-                        <FormControlLabel
-                          value="yes"
-                          control={<Radio />}
-                          label="Yes"
-                        />
-                        <FormControlLabel
-                          value="no"
-                          control={<Radio />}
-                          label="No"
-                        />
-                      </RadioGroup>
-                    </Stack>
-                  </FormGroup>
-                </Box>
-              </Stack>
+                        <p style={{ paddingLeft: "10px" }}>
+                          Is this your WhatsApp number?
+                        </p>
+                        <RadioGroup
+                          row
+                          aria-labelledby="demo-row-radio-buttons-group-label"
+                          name="row-radio-buttons-group"
+                          value={whatsApp}
+                          onChange={(e) => setWhatsApp(e.target.value)}
+                        >
+                          <FormControlLabel
+                            value="yes"
+                            control={<Radio />}
+                            label="Yes"
+                          />
+                          <FormControlLabel
+                            value="no"
+                            control={<Radio />}
+                            label="No"
+                          />
+                        </RadioGroup>
+                      </Stack>
+                    </FormGroup>
+                  </Box>
+                </Stack>
+              </div>
             </div>
-          </div>
 
-          <Stack alignItems={"center"} sx={{ mb: 4 }}>
-            <Button
-              variant="contained"
-              type="submit"
-              sx={{ padding: "20px 200px" }}
-              size="large"
-            >
-              {isLoading ? (
-                <CircularProgress size={20} color="inherit" />
-              ) : (
-                "update"
-              )}
-            </Button>
-          </Stack>
-        </div>
-      </form>
+            <Stack alignItems={"center"} sx={{ mb: 4 }}>
+              <Button
+                variant="contained"
+                type="submit"
+                sx={{ padding: { xs: "10px 100px", md: "20px 200px" } }}
+                size="large"
+              >
+                {isLoading ? (
+                  <CircularProgress size={20} color="inherit" />
+                ) : (
+                  "update"
+                )}
+              </Button>
+            </Stack>
+          </div>
+        </form>
+      </Box>
       <form onSubmit={handleVendorRegister}>
         <div className={styles["form-wrapper"]}>
           {/*  */}
@@ -392,10 +394,10 @@ const ProfileForm = () => {
             </h2>
             <div className={styles["form-group"]}>
               <Stack spacing={1} sx={{ mb: 3 }}>
-                <label htmlFor="bname">Enter Your Business Name</label>
+                <label htmlFor="bname">Company / Store Name</label>
                 <TextField
                   id="bname"
-                  placeholder="eg: XYZ Enterprises"
+                  placeholder="Enter your company / store name"
                   sx={{ ...textfieldStyles }}
                   variant="outlined"
                   value={bname}
@@ -405,10 +407,10 @@ const ProfileForm = () => {
             </div>
             <div className={styles["form-group"]}>
               <Stack spacing={1} sx={{ mb: 3 }}>
-                <label htmlFor="website">Enter Your Business Website</label>
+                <label htmlFor="website">Business Website</label>
                 <TextField
                   id="website"
-                  placeholder="eg: www.xyz.com"
+                  placeholder="Enter your business website"
                   sx={{ ...textfieldStyles }}
                   variant="outlined"
                   value={bwebsite}
@@ -418,10 +420,10 @@ const ProfileForm = () => {
             </div>
             <div className={styles["form-group"]}>
               <Stack spacing={1} sx={{ mb: 3 }}>
-                <label htmlFor="location">Enter Your Business Location</label>
+                <label htmlFor="location">Business Location</label>
                 <TextField
                   id="location"
-                  placeholder="eg: #45, 3rd Main, 5th Cross, Jp Nagar, Bangalore"
+                  placeholder="Enter your business location"
                   sx={{ ...textfieldStyles }}
                   variant="outlined"
                   value={blocation}
@@ -569,8 +571,8 @@ const ProfileForm = () => {
                   alt="info icon"
                 />
                 <p className="info-txt">
-                  For Ex. If you are an "Plumber", type "plu" and select
-                  "Plumber" from the list.
+                  For Ex. If you are an &quot;Plumber&quot;, type
+                  &quot;plu&quot; and select &quot;Plumber&quot; from the list.
                 </p>
               </div>
             </div>
@@ -617,10 +619,10 @@ const ProfileForm = () => {
                 />
               </Stack>
               <Stack spacing={1} sx={{ mb: 3 }}>
-                <label htmlFor="about">Write About Your Business</label>
+                <label htmlFor="about">About Your Business</label>
                 <TextField
                   id="about"
-                  placeholder="eg: XYZ business specializes in abc works..."
+                  placeholder="Write about your business"
                   sx={{ ...textfieldStyles }}
                   variant="outlined"
                   multiline
@@ -636,7 +638,7 @@ const ProfileForm = () => {
             <Button
               variant="contained"
               type="submit"
-              sx={{ padding: "20px 200px" }}
+              sx={{ padding: { xs: "10px 100px", md: "20px 200px" } }}
               size="large"
             >
               {isLoading ? (

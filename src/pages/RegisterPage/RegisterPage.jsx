@@ -12,8 +12,6 @@ import BusinessDetailsForm from "../../sections/RegisterPage/BusinessDetailsForm
 import BusinessAboutImgForm from "../../sections/RegisterPage/BusinessAboutImgForm";
 import RegisterSuccess from "../../sections/RegisterPage/RegisterSuccess";
 
-import { Link } from "react-router-dom";
-
 const RegisterPage = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -31,7 +29,7 @@ const RegisterPage = () => {
         />
       </Helmet>
       <div className={styles["page-container"]}>
-        <div className="nav-header">
+        <div className="nav-header desktop-only">
           <Navbar color="dark" logoOnly={true} />
         </div>
         <div className={styles["signin-img-container"]}></div>
