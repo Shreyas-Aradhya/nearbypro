@@ -172,7 +172,7 @@ const ProfileForm = ({ setCurrForm }) => {
           <label htmlFor="name">Full Name</label>
           <TextField
             id="name"
-            placeholder="eg: John Doe"
+            placeholder="Enter your full name"
             sx={{ ...textfieldStyles }}
             variant="outlined"
             value={name}
@@ -181,10 +181,10 @@ const ProfileForm = ({ setCurrForm }) => {
           />
         </Stack>
         <Stack spacing={1} sx={{ width: "100%" }}>
-          <label htmlFor="email">Email Id</label>
+          <label htmlFor="email">Email Address</label>
           <TextField
             id="email"
-            placeholder="eg: user@example.com"
+            placeholder="Enter your email address"
             sx={{ ...textfieldStyles }}
             variant="outlined"
             value={email}
@@ -197,7 +197,7 @@ const ProfileForm = ({ setCurrForm }) => {
             <TextField
               fullWidth
               id="mobile-number"
-              placeholder="eg: 9876543210"
+              placeholder="Enter your mobile number"
               sx={{ ...textfieldStyles }}
               variant="outlined"
               value={mobileNumber}

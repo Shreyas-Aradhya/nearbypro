@@ -5,14 +5,12 @@ import infoIcon from "/img/info-icon.png";
 import searchIcon from "/icons/search-icon.svg";
 
 // mui
-import Box from "@mui/material/Box";
 
 import TextField from "@mui/material/TextField";
 import Stack from "@mui/material/Stack";
 import InputAdornment from "@mui/material/InputAdornment";
 import Button from "@mui/material/Button";
 
-import FormGroup from "@mui/material/FormGroup";
 import FormControl from "@mui/material/FormControl";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Radio from "@mui/material/Radio";
@@ -242,6 +240,7 @@ const BusinessDetailsForm = ({ setCurrForm }) => {
                 }}
                 renderInput={(params) => (
                   <TextField
+                    placeholder="eg: Plumber"
                     sx={{ ...textfieldStyles }}
                     fullWidth
                     variant="outlined"
@@ -261,8 +260,8 @@ const BusinessDetailsForm = ({ setCurrForm }) => {
               alt="info icon"
             />
             <p className="info-txt">
-              For Ex. If you are an "Plumber", type "plu" and select "Plumber"
-              from the list.
+              For Ex. If you are an &quot;Plumber&quot;, type &quot;plu&quot;
+              and select &quot;Plumber&quot; from the list.
             </p>
           </div>
         </Stack>

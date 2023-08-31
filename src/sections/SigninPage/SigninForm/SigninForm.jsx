@@ -7,6 +7,7 @@ import TextField from "@mui/material/TextField";
 import Stack from "@mui/material/Stack";
 import InputAdornment from "@mui/material/InputAdornment";
 import Button from "@mui/material/Button";
+// import IconButton from "@mui/material/IconButton";
 // context
 import { AuthContext } from "../../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
@@ -107,7 +108,7 @@ const SigninForm = () => {
           <label htmlFor="mobile-number">Mobile Number</label>
           <TextField
             id="mobile-number"
-            placeholder="eg: 9876543210"
+            placeholder="Enter mobile number"
             error={mobileNumberErr.length > 0}
             helperText={mobileNumberErr}
             sx={{ ...textfieldStyles }}
@@ -126,7 +127,7 @@ const SigninForm = () => {
                     onClick={handleNumberChange}
                     sx={{
                       textTransform: "capitalize",
-                      visibility: otpSent ? "visible" : "hidden",
+                      display: otpSent ? "block" : "none",
                     }}
                   >
                     change number

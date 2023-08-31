@@ -3,24 +3,16 @@ import styles from "./RegisterForm.module.css";
 import back_icon from "/icons/back-icon.svg";
 
 // mui
-import Box from "@mui/material/Box";
 
 import TextField from "@mui/material/TextField";
 import Stack from "@mui/material/Stack";
-import InputAdornment from "@mui/material/InputAdornment";
 import Button from "@mui/material/Button";
-
-import FormGroup from "@mui/material/FormGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Radio from "@mui/material/Radio";
-import RadioGroup from "@mui/material/RadioGroup";
 
 import CircularProgress from "@mui/material/CircularProgress";
 
 import { enqueueSnackbar } from "notistack";
 
 import { AuthContext } from "../../contexts/AuthContext";
-import Map from "../../components/Map/Map";
 import PlacesAutocomplete from "../../components/Map/PlacesAutocomplete";
 
 const textfieldStyles = {
@@ -106,6 +98,7 @@ const BusinessNameForm = ({ setCurrForm }) => {
           <label htmlFor="bname">Company / Store Name</label>
           <TextField
             id="bname"
+            placeholder="Enter your company / store name"
             sx={{ ...textfieldStyles }}
             variant="outlined"
             value={bname}
@@ -117,6 +110,7 @@ const BusinessNameForm = ({ setCurrForm }) => {
           <label htmlFor="website">Business Website</label>
           <TextField
             id="website"
+            placeholder="Enter your business website"
             sx={{ ...textfieldStyles }}
             variant="outlined"
             value={bwebsite}
@@ -124,9 +118,10 @@ const BusinessNameForm = ({ setCurrForm }) => {
           />
         </Stack>
         <Stack spacing={1} sx={{ width: "100%" }}>
-          <label htmlFor="location">Business Address</label>
+          <label htmlFor="location">Business Location</label>
           <TextField
             id="location"
+            placeholder="Enter your business location"
             sx={{ ...textfieldStyles }}
             variant="outlined"
             value={blocation}

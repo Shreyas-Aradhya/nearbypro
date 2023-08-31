@@ -9,13 +9,7 @@ import Box from "@mui/material/Box";
 
 import TextField from "@mui/material/TextField";
 import Stack from "@mui/material/Stack";
-import InputAdornment from "@mui/material/InputAdornment";
 import Button from "@mui/material/Button";
-
-import FormGroup from "@mui/material/FormGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Radio from "@mui/material/Radio";
-import RadioGroup from "@mui/material/RadioGroup";
 
 import CircularProgress from "@mui/material/CircularProgress";
 
@@ -171,9 +165,10 @@ const BusinessAboutImgForm = ({ setCurrForm }) => {
           </Stack>
         </Stack>
         <Stack spacing={1} sx={{ width: "100%" }}>
-          <label htmlFor="about">Write About Your Business</label>
+          <label htmlFor="about">About Your Business</label>
           <TextField
             id="about"
+            placeholder="Write about your business"
             sx={{ ...textfieldStyles }}
             variant="outlined"
             multiline
