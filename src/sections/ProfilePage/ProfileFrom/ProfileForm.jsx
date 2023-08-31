@@ -35,6 +35,7 @@ import { AuthContext } from "../../../contexts/AuthContext";
 import s3ImageUpload from "../../../services/s3ImageUpload";
 import getSubCategories from "../../../services/getSubCategories";
 import PlacesAutocomplete from "../../../components/Map/PlacesAutocomplete";
+import PlacesAutocompleteNew from "../../../components/Map/PlacesAutocompleteNew";
 
 const textfieldStyles = {
   "& .MuiOutlinedInput-notchedOutline": {

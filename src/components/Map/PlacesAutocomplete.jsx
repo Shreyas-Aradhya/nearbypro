@@ -19,7 +19,12 @@ const textfieldStyles = {
   },
 };
 
-const PlacesInput = ({ setSelected, getLocData, currData }) => {
+const PlacesInput = ({
+  setSelected,
+  getLocData,
+  locAddress,
+  setLocAddress,
+}) => {
   const {
     ready,
     value,
@@ -28,12 +33,10 @@ const PlacesInput = ({ setSelected, getLocData, currData }) => {
     clearSuggestions,
   } = usePlacesAutocomplete();
 
-  const [locAddress, setLocAddress] = useState(currData?.address || "");
-
   const handleSelect = async (address) => {
     clearSuggestions();
     const results = await getGeocode({ address });
-    const { lat, lng } = await getLatLng(results[0]);
+    const { lat, lng } = getLatLng(results[0]);
     setSelected({ lat, lng });
     setLocAddress(address);
     getLocData({ address, lat, lng });
@@ -67,12 +70,30 @@ function Map({ getLocData, currData }) {
       ? { lat: currData?.lat, lng: currData?.lng }
       : null
   );
+
+  const [locAddress, setLocAddress] = useState(
+    currData?.address || "Bengaluru, Karnataka, India"
+  );
+
+  const getAddress = async (latLng) => {
+    const results = await getGeocode({
+      location: {
+        lat: parseFloat(latLng.lat),
+        lng: parseFloat(latLng.lng),
+      },
+    });
+    let address = results[0].formatted_address;
+    setLocAddress(address);
+    getLocData({ address, lat: latLng.lat, lng: latLng.lng });
+  };
+
   return (
     <Stack spacing={1} sx={{ width: "100%" }}>
       <PlacesInput
         setSelected={setSelected}
         getLocData={getLocData}
-        currData={currData}
+        locAddress={locAddress}
+        setLocAddress={setLocAddress}
       />
       <GoogleMap
         zoom={15}
@@ -82,20 +103,21 @@ function Map({ getLocData, currData }) {
         <MarkerF
           position={selected || mapCenter}
           draggable
-          onPositionChanged={(e) => console.log(e)}
+          onDragEnd={(e) => getAddress(e.latLng.toJSON())}
         />
       </GoogleMap>
     </Stack>
   );
 }
 
-const mapLib = ["places"];
+const mapLib = ["places", "marker"];
 
 const PlacesAutocomplete = ({ getLocData, currData }) => {
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: GOOGLE_MAPS_API_KEY,
     libraries: mapLib,
   });
+
   if (!isLoaded) return <div>Loading...</div>;
   return <Map getLocData={getLocData} currData={currData} />;
 };
