@@ -95,7 +95,9 @@ const BusinessNameForm = ({ setCurrForm }) => {
           <h1 className={styles["form-title"]}>Business Name & Address</h1>
         </Stack>
         <Stack spacing={1} sx={{ width: "100%" }}>
-          <label htmlFor="bname">Company / Store Name</label>
+          <label htmlFor="bname">
+            Company / Store Name <span className="red-text">*</span>
+          </label>
           <TextField
             id="bname"
             placeholder="Enter your company / store name"
@@ -118,10 +120,13 @@ const BusinessNameForm = ({ setCurrForm }) => {
           />
         </Stack>
         <Stack spacing={1} sx={{ width: "100%" }}>
-          <label htmlFor="location">Business Location</label>
+          <label htmlFor="location">
+            Business Address <span className="red-text">*</span>
+          </label>
           <TextField
             id="location"
-            placeholder="Enter your business location"
+            required
+            placeholder="Enter your business address"
             sx={{ ...textfieldStyles }}
             variant="outlined"
             value={blocation}
@@ -129,7 +134,9 @@ const BusinessNameForm = ({ setCurrForm }) => {
           />
         </Stack>
         <Stack spacing={1} sx={{ width: "100%" }}>
-          <label htmlFor="locality">Locality</label>
+          <label htmlFor="locality">
+            Locality <span className="red-text">*</span>
+          </label>
           <PlacesAutocomplete getLocData={handleLocalitySelect} />
         </Stack>
         <Button fullWidth type="submit" variant="contained" size="large">

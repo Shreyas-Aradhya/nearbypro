@@ -1,3 +1,15 @@
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
 .container {
   max-width: 1320px;
   width: 85vw;
@@ -25,6 +37,10 @@
   /* display: flex;
   align-items: center;
   justify-content: space-between; */
+}
+
+.red-text {
+  color: red;
 }
 
 .close-btn {
@@ -100,4 +116,10 @@
   .mobile-only.flex {
     display: flex;
   }
+}
+
+/*  MUI overrides */
+.MuiFormControlLabel-asterisk {
+  color: red;
+  display: none;
 }

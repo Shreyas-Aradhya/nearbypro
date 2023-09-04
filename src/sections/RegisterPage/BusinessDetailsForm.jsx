@@ -142,7 +142,6 @@ const BusinessDetailsForm = ({ setCurrForm }) => {
           <RadioGroup
             aria-labelledby="btype-buttons-group-label"
             name="btype-buttons-group"
-            value={btype}
             onChange={(e) => setBtype(e.target.value)}
           >
             <FormControlLabel
@@ -150,6 +149,7 @@ const BusinessDetailsForm = ({ setCurrForm }) => {
               sx={{ mb: 3 }}
               control={
                 <Radio
+                  required
                   sx={{
                     "& .MuiSvgIcon-root": {
                       fontSize: "2rem",
@@ -160,7 +160,9 @@ const BusinessDetailsForm = ({ setCurrForm }) => {
               }
               label={
                 <div className={styles["radio-label"]}>
-                  <h4>Individual</h4>
+                  <h4>
+                    Individual <span className="red-text">*</span>
+                  </h4>
                   <p>I work as a sole professional</p>
                 </div>
               }
@@ -170,6 +172,7 @@ const BusinessDetailsForm = ({ setCurrForm }) => {
               sx={{ mb: 3 }}
               control={
                 <Radio
+                  required
                   sx={{
                     "& .MuiSvgIcon-root": {
                       fontSize: "2rem",
@@ -180,7 +183,9 @@ const BusinessDetailsForm = ({ setCurrForm }) => {
               }
               label={
                 <div className={styles["radio-label"]}>
-                  <h4>Contractor / Agency</h4>
+                  <h4>
+                    Contractor / Agency <span className="red-text">*</span>
+                  </h4>
                   <p>I have a team of workers under me</p>
                 </div>
               }
@@ -190,6 +195,7 @@ const BusinessDetailsForm = ({ setCurrForm }) => {
               sx={{ mb: 3 }}
               control={
                 <Radio
+                  required
                   sx={{
                     "& .MuiSvgIcon-root": {
                       fontSize: "2rem",
@@ -200,7 +206,9 @@ const BusinessDetailsForm = ({ setCurrForm }) => {
               }
               label={
                 <div className={styles["radio-label"]}>
-                  <h4>Business</h4>
+                  <h4>
+                    Business <span className="red-text">*</span>
+                  </h4>
                   <p>I have a business or shop</p>
                 </div>
               }
@@ -226,7 +234,9 @@ const BusinessDetailsForm = ({ setCurrForm }) => {
         </Stack>
         <Stack spacing={1} sx={{ width: "100%" }}>
           <Stack spacing={1} sx={{ mb: 3 }}>
-            <label htmlFor="name">Search To Select Your Skills</label>
+            <label htmlFor="name">
+              Search To Select Your Skills <span className="red-text">*</span>
+            </label>
             <Stack direction={{ xs: "column", md: "row" }} spacing={2}>
               <Autocomplete
                 sx={{ flex: "1" }}

@@ -15,7 +15,7 @@ const RegisterSuccess = () => {
         <h2 className={styles["success_msg"]}>Registration Success</h2>
       </div>
       <Link to="/profile">
-        <p className={styles["profile-link"]}>Review Profile Page</p>
+        <p className={styles["profile-link"]}>Click to review profile</p>
       </Link>
     </div>
   );

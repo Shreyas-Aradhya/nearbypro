@@ -108,6 +108,7 @@ const SigninForm = () => {
           <label htmlFor="mobile-number">Mobile Number</label>
           <TextField
             id="mobile-number"
+            type="number"
             placeholder="Enter mobile number"
             error={mobileNumberErr.length > 0}
             helperText={mobileNumberErr}
@@ -155,7 +156,7 @@ const SigninForm = () => {
                 onChange={setOtp}
                 numInputs={4}
                 // renderSeparator={<span>-</span>}
-                renderInput={(props) => <input {...props} />}
+                renderInput={(props) => <input {...props} type="number" />}
                 containerStyle={{ gap: "3rem" }}
                 inputStyle={{
                   flex: 1,

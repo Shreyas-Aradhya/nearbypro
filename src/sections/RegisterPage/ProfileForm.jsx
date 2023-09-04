@@ -69,7 +69,7 @@ const ProfileForm = ({ setCurrForm }) => {
   const [email, setEmail] = useState(user?.email || "");
   const [mobileNumber, setMobileNumber] = useState(user?.mobile || "");
   const [whatsApp, setWhatsApp] = useState(
-    user?.whatsApp === true ? "yes" : "no" || "no"
+    user?.whatsApp === true ? "yes" : "" || ""
   );
 
   useEffect(() => {
@@ -169,7 +169,9 @@ const ProfileForm = ({ setCurrForm }) => {
           </div>
         </div>
         <Stack spacing={1} sx={{ width: "100%" }}>
-          <label htmlFor="name">Full Name</label>
+          <label htmlFor="name">
+            Full Name <span className="red-text">*</span>
+          </label>
           <TextField
             id="name"
             placeholder="Enter your full name"
@@ -225,13 +227,16 @@ const ProfileForm = ({ setCurrForm }) => {
                   row
                   aria-labelledby="demo-row-radio-buttons-group-label"
                   name="row-radio-buttons-group"
-                  value={whatsApp}
                   onChange={(e) => setWhatsApp(e.target.value)}
                 >
                   <FormControlLabel
                     value="yes"
-                    control={<Radio />}
-                    label="Yes"
+                    control={<Radio required />}
+                    label={
+                      <p>
+                        Yes <span className="red-text">*</span>
+                      </p>
+                    }
                     sx={{
                       "& .MuiFormControlLabel-label": {
                         fontSize: { xs: "0.8rem", md: "1rem" },
@@ -243,8 +248,12 @@ const ProfileForm = ({ setCurrForm }) => {
                   />
                   <FormControlLabel
                     value="no"
-                    control={<Radio />}
-                    label="No"
+                    control={<Radio required />}
+                    label={
+                      <p>
+                        No <span className="red-text">*</span>
+                      </p>
+                    }
                     sx={{
                       "& .MuiFormControlLabel-label": {
                         fontSize: { xs: "0.8rem", md: "1rem" },
