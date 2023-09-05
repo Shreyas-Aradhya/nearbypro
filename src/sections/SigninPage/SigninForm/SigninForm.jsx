@@ -115,6 +115,7 @@ const SigninForm = () => {
             sx={{ ...textfieldStyles }}
             variant="outlined"
             disabled={otpSent}
+            inputProps={{ inputMode: "numeric" }}
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
@@ -156,7 +157,9 @@ const SigninForm = () => {
                 onChange={setOtp}
                 numInputs={4}
                 // renderSeparator={<span>-</span>}
-                renderInput={(props) => <input {...props} type="number" />}
+                renderInput={(props) => (
+                  <input {...props} type="number" inputMode="numeric" />
+                )}
                 containerStyle={{ gap: "3rem" }}
                 inputStyle={{
                   flex: 1,

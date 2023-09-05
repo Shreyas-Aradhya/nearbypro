@@ -539,7 +539,7 @@ const ProfileForm = () => {
               </Stack>
               <Stack spacing={1} sx={{ mb: 3 }}>
                 <label htmlFor="name">Search To Select Your Skills</label>
-                <Stack direction={{ xs: "column", md: "row" }} spacing={2}>
+                <Stack direction={{ xs: "row", md: "row" }} spacing={2}>
                   <Autocomplete
                     sx={{ flex: "1" }}
                     disablePortal

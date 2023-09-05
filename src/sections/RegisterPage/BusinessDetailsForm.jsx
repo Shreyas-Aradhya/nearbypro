@@ -237,7 +237,7 @@ const BusinessDetailsForm = ({ setCurrForm }) => {
             <label htmlFor="name">
               Search To Select Your Skills <span className="red-text">*</span>
             </label>
-            <Stack direction={{ xs: "column", md: "row" }} spacing={2}>
+            <Stack direction={{ xs: "row", md: "row" }} spacing={2}>
               <Autocomplete
                 sx={{ flex: "1" }}
                 disablePortal
