@@ -9,6 +9,10 @@ import { GOOGLE_MAPS_API_KEY } from "../../config";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
 import Stack from "@mui/material/Stack";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import MyLocationIcon from "@mui/icons-material/MyLocation";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
 
 const textfieldStyles = {
   "& .MuiOutlinedInput-notchedOutline": {
@@ -83,8 +87,21 @@ function Map({ getLocData, currData }) {
       },
     });
     let address = results[0].formatted_address;
+    setSelected({
+      lat: parseFloat(latLng.lat),
+      lng: parseFloat(latLng.lng),
+    });
     setLocAddress(address);
     getLocData({ address, lat: latLng.lat, lng: latLng.lng });
+  };
+
+  const getCurrLocation = () => {
+    navigator.geolocation.getCurrentPosition(function (position) {
+      getAddress({
+        lat: position.coords.latitude,
+        lng: position.coords.longitude,
+      });
+    });
   };
 
   return (
@@ -95,6 +112,26 @@ function Map({ getLocData, currData }) {
         locAddress={locAddress}
         setLocAddress={setLocAddress}
       />
+      <Stack
+        direction="row"
+        justifyContent="space-between"
+        spacing={2}
+        alignItems="center"
+      >
+        <Stack direction="row" spacing={0} alignItems="center">
+          <LocationOnIcon />
+          <Typography variant="body2" display="block">
+            Mark Locality on Map
+          </Typography>
+        </Stack>
+        <Button
+          sx={{ textTransform: "capitalize" }}
+          onClick={getCurrLocation}
+          startIcon={<MyLocationIcon />}
+        >
+          Use current location
+        </Button>
+      </Stack>
       <GoogleMap
         zoom={15}
         center={selected || mapCenter}
