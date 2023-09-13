@@ -1,6 +1,6 @@
 import axios from "../utils/axios";
 
-const getCategories = async ({ offset = 0, limit = 11, parent = null }) => {
+const getCategories = async ({ offset = 0, limit = null, parent = null }) => {
   try {
     const filters = {
       offset: offset,

@@ -46,6 +46,7 @@ const ServicesWidget = () => {
     const getData = async () => {
       try {
         const data = await getCategories({});
+        console.log(data);
         setCategories(data);
       } catch (error) {
         console.log(error);
@@ -58,19 +59,22 @@ const ServicesWidget = () => {
     <div className={styles["services-widget-wrapper"]}>
       <div className="container-xl">
         <div className={styles["services-grid"]}>
-          {categories?.map((category, index) => (
-            <ServiceItem
-              key={index}
-              title={category?.name}
-              icon={category?.image}
-              id={category?.id}
-              banner={category?.banner}
-              sections={category?.sections}
-              metaTitle={category?.meta_title}
-              metaDescription={category?.meta_description}
-              description={category?.description}
-            />
-          ))}
+          {categories?.map(
+            (category, index) =>
+              category?.status === true && (
+                <ServiceItem
+                  key={index}
+                  title={category?.name}
+                  icon={category?.image}
+                  id={category?.id}
+                  banner={category?.banner}
+                  sections={category?.sections}
+                  metaTitle={category?.meta_title}
+                  metaDescription={category?.meta_description}
+                  description={category?.description}
+                />
+              )
+          )}
           {/* <ServiceItem
             title={"Automobiles Applications"}
             icon="https://www.iconpacks.net/icons/2/free-store-icon-2017-thumb.png"
