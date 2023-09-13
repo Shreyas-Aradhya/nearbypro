@@ -11,12 +11,11 @@ import SubCategoriesWidget from "../../sections/HomePage/ServicesWidget/SubCateg
 
 import getCategories from "../../services/getCategories";
 
-import { useParams, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 
 const CategoryPage = () => {
   const location = useLocation();
-  let { name } = useParams();
 
   const [subCategories, setSubCategories] = useState([]);
   useEffect(() => {
@@ -37,10 +36,16 @@ const CategoryPage = () => {
   return (
     <div>
       <Helmet>
-        <title>{location?.state?.metaTitle || `${name} | Nearby-pro`}</title>
+        <title>
+          {location?.state?.metaTitle ||
+            `${location?.state?.title} | Nearby-pro`}
+        </title>
         <meta
           name="description"
-          content={location?.state?.metaDescription || `${name} on nearby pro`}
+          content={
+            location?.state?.metaDescription ||
+            `${location?.state?.title} on nearby pro`
+          }
         />
       </Helmet>
       <div className="header">
@@ -48,13 +53,13 @@ const CategoryPage = () => {
           <Navbar />
         </header>
         <HeroBanner
-          title={name}
-          description={location?.state?.metaDescription}
+          title={location?.state?.title}
+          description={location?.state?.description}
           banner={location?.state?.banner[0]?.url}
         />
       </div>
       <StatsWidget />
-      {!name && <ServicesWidget />}
+      {!location?.state?.title && <ServicesWidget />}
       {subCategories?.length > 0 && (
         <SubCategoriesWidget subCategories={subCategories} />
       )}

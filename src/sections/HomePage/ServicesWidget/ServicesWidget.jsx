@@ -11,14 +11,23 @@ const ServiceItem = ({
   icon,
   title,
   banner,
+  description,
   metaTitle,
   metaDescription,
   sections,
 }) => {
   return (
     <Link
-      to={`/category/${title}`}
-      state={{ banner, metaTitle, metaDescription, id, sections }}
+      to={`/category/${title.toLowerCase().replace(" ", "_")}`}
+      state={{
+        title,
+        banner,
+        description,
+        metaTitle,
+        metaDescription,
+        id,
+        sections,
+      }}
     >
       <div className={styles["service-item"]}>
         <div className={styles["service-icon-container"]}>
@@ -59,6 +68,7 @@ const ServicesWidget = () => {
               sections={category?.sections}
               metaTitle={category?.meta_title}
               metaDescription={category?.meta_description}
+              description={category?.description}
             />
           ))}
           {/* <ServiceItem
