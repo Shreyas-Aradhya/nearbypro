@@ -38,14 +38,18 @@ const CategoryPage = () => {
       <Helmet>
         <title>
           {location?.state?.metaTitle ||
-            `${location?.state?.title} | Nearby-pro`}
+            `${location?.state?.title} | Local Pro`}
         </title>
         <meta
           name="description"
           content={
             location?.state?.metaDescription ||
-            `${location?.state?.title} on nearby pro`
+            `${location?.state?.title} on local pro`
           }
+        />
+        <meta
+          name="keywords"
+          content="Local Service Industry Partners, Collaborative Service Professionals, Local Business Networking, Grow Your Local Business, Service Provider Collaboration, Partner Program for Service Experts, Boost Visibility Locally, Trustworthy Local Service Providers, Local Business Marketing Support, Seamless Integration for Service Professionals, Customize Your Service Profile, Local Service Industry Community, Expand Your Local Client Base, Marketing Resources for Small Businesses, Local Pro Partner Benefits, Join the Local Pro Network, Success in the Service Industry, Local Service Expertise, Customer Trust Building, Local Pro Partnerships"
         />
       </Helmet>
       <div className="header">

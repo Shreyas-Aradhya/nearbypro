@@ -42,12 +42,27 @@
   line-height: 2.5rem;
 }
 
+.content-txt h4 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 2rem;
+  margin-bottom: 10px;
+}
+
 .content-txt p {
   margin-bottom: 10px;
 }
 
 .content-txt p:last-child {
   margin-bottom: 0px;
+}
+
+.content-txt ul {
+  margin-left: 30px;
+}
+
+.content-txt ul li {
+  margin-bottom: 10px;
 }
 
 @media (max-width: 767px) {
