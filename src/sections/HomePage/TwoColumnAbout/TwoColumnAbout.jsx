@@ -15,9 +15,11 @@ const ContentRow = ({ title, text, img, alt, listTitle, listItems }) => {
           <h3>{title}</h3>
         </div>
         <div className={styles["content-txt"]}>
-          {text?.map((p, index) => (
-            <p key={index}>{p}</p>
-          ))}
+          {typeof text === "Array" ? (
+            text?.map((p, index) => <p key={index}>{p}</p>)
+          ) : (
+            <p>{text}</p>
+          )}
           {listTitle && <h4>{listTitle}</h4>}
           {listItems && (
             <ul>

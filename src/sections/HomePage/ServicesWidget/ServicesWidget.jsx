@@ -46,7 +46,6 @@ const ServicesWidget = () => {
     const getData = async () => {
       try {
         const data = await getCategories({});
-        console.log(data);
         setCategories(data);
       } catch (error) {
         console.log(error);

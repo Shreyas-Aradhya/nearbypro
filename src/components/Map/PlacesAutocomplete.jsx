@@ -96,7 +96,17 @@ function Map({ getLocData, currData }) {
   };
 
   const getCurrLocation = () => {
+    console.log("Function called");
+    if ("geolocation" in navigator) {
+      console.log("Available");
+    } else {
+      console.log("Not Available");
+    }
     navigator.geolocation.getCurrentPosition(function (position) {
+      console.log({
+        lat: position.coords.latitude,
+        lng: position.coords.longitude,
+      });
       getAddress({
         lat: position.coords.latitude,
         lng: position.coords.longitude,
