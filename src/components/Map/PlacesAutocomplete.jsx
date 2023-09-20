@@ -144,6 +144,7 @@ function Map({ getLocData, currData }) {
       </Stack>
       <GoogleMap
         zoom={15}
+        options={{ disableDefaultUI: true }}
         center={selected || mapCenter}
         mapContainerClassName="google-map-container"
       >
