@@ -16,13 +16,16 @@ const SubCategoriesWidget = ({ subCategories }) => {
     <div className={styles["services-widget-wrapper"]}>
       <div className="container">
         <div className={styles["services-grid"]}>
-          {subCategories?.map((subCategory, index) => (
-            <ServiceItem
-              key={index}
-              title={subCategory.name}
-              icon={subCategory.image}
-            />
-          ))}
+          {subCategories?.map(
+            (subCategory, index) =>
+              subCategory?.status === true && (
+                <ServiceItem
+                  key={index}
+                  title={subCategory.name}
+                  icon={subCategory.image}
+                />
+              )
+          )}
         </div>
       </div>
     </div>
