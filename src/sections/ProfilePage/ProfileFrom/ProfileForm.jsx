@@ -544,6 +544,13 @@ const ProfileForm = () => {
                     disablePortal
                     id="combo-box-demo"
                     options={categories}
+                    renderOption={(props, option) => {
+                      return (
+                        <li {...props} key={option?.id}>
+                          {option?.name}
+                        </li>
+                      );
+                    }}
                     getOptionLabel={(option) => option?.name || ""}
                     value={autoCompleteValue}
                     onChange={(event, newValue) => {

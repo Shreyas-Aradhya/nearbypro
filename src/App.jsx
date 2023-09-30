@@ -16,6 +16,7 @@ import { SnackbarProvider } from "notistack";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import ProfileGaurd from "./gaurds/ProfileGaurd";
+import NotFound from "./pages/NotFound";
 
 function App() {
   return (
@@ -52,6 +53,7 @@ function App() {
               </AuthGuard>
             }
           ></Route>
+          <Route path="/*" element={<NotFound />} />
         </Routes>
         <Footer />
       </HelmetProvider>

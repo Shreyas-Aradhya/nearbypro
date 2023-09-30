@@ -18,7 +18,7 @@ const ServiceItem = ({
 }) => {
   return (
     <Link
-      to={`/category/${title.toLowerCase().replace(" ", "_")}`}
+      to={`/category/${title.toLowerCase().replace(/ /g, "_")}`}
       state={{
         title,
         banner,

@@ -4,31 +4,39 @@ import Navbar from "../../layout/nav/Navbar";
 import HeroBanner from "../../sections/HomePage/HeroBanner/HeroBanner";
 import OurTeamWidget from "../../sections/HomePage/OurTeamWidget/OurTeamWidget";
 import RegisterWidget from "../../sections/HomePage/RegisterWidget/RegisterWidget";
-import ServicesWidget from "../../sections/HomePage/ServicesWidget/ServicesWidget";
+// import ServicesWidget from "../../sections/HomePage/ServicesWidget/ServicesWidget";
 import StatsWidget from "../../sections/HomePage/StatsWidget/StatsWidget";
 import TwoColumnAbout from "../../sections/HomePage/TwoColumnAbout/TwoColumnAbout";
 import SubCategoriesWidget from "../../sections/HomePage/ServicesWidget/SubCategoriesWidget";
 
 import getCategories from "../../services/getCategories";
+import getCategoryById from "../../services/getCategoryById";
 
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 
 const CategoryPage = () => {
   const location = useLocation();
+  const navigate = useNavigate();
 
+  const [currCategory, setCurrCategories] = useState({});
   const [subCategories, setSubCategories] = useState([]);
   useEffect(() => {
     const getData = async () => {
       try {
+        const cat = await getCategoryById(location?.state?.id);
+        setCurrCategories(cat);
         const data = await getCategories({ parent: location?.state?.id });
         setSubCategories(data);
       } catch (error) {
         console.log(error);
       }
     };
+    if (!location?.state?.id) {
+      navigate("/404");
+    }
     getData();
-  }, []);
+  }, [location?.state?.id, navigate]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -37,14 +45,13 @@ const CategoryPage = () => {
     <div>
       <Helmet>
         <title>
-          {location?.state?.metaTitle ||
-            `${location?.state?.title} | Local Pro`}
+          {currCategory?.meta_title || `${currCategory?.name} | Local Pro`}
         </title>
         <meta
           name="description"
           content={
-            location?.state?.metaDescription ||
-            `${location?.state?.title} on local pro`
+            currCategory?.meta_description ||
+            `${currCategory?.name} on local pro`
           }
         />
         <meta
@@ -57,18 +64,18 @@ const CategoryPage = () => {
           <Navbar />
         </header>
         <HeroBanner
-          title={location?.state?.title}
-          description={location?.state?.description}
-          banner={location?.state?.banner[0]?.url}
+          title={currCategory?.name}
+          description={currCategory?.description}
+          banner={currCategory?.banner && currCategory?.banner[0]?.url}
         />
       </div>
       <StatsWidget />
-      {!location?.state?.title && <ServicesWidget />}
+      {/* {!location?.state?.title && <ServicesWidget />} */}
       {subCategories?.length > 0 && (
         <SubCategoriesWidget subCategories={subCategories} />
       )}
-      {location?.state?.sections && location?.state?.sections.length > 0 && (
-        <TwoColumnAbout sections={location?.state?.sections} />
+      {currCategory?.sections && currCategory?.sections.length > 0 && (
+        <TwoColumnAbout sections={currCategory?.sections} />
       )}
       <OurTeamWidget />
       <RegisterWidget />
