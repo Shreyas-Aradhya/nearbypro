@@ -14,7 +14,7 @@ const getCategoryBySlug = async (slug) => {
     const response = await axios.request(config);
     return response.data;
   } catch (error) {
-    console.log(error);
+    throw new Error(error.message);
   }
 };
 

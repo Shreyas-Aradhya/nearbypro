@@ -25,6 +25,9 @@ const CategoryPage = () => {
     const getData = async () => {
       try {
         const cat = await getCategoryBySlug(slug);
+        if (!cat) {
+          throw new Error("Category not found");
+        }
         setCurrCategories(cat);
         const data = await getCategories({ parent: cat?.id });
         setSubCategories(data);
