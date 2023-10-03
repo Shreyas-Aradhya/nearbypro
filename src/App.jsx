@@ -25,7 +25,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Homepage />} />
           <Route path="/category">
-            <Route path=":name" element={<CategoryPage />} />
+            <Route path=":slug" element={<CategoryPage />} />
           </Route>
           <Route
             path="/signin"

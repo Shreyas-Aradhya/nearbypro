@@ -15,10 +15,11 @@ const ServiceItem = ({
   metaTitle,
   metaDescription,
   sections,
+  slug,
 }) => {
   return (
     <Link
-      to={`/category/${title.toLowerCase().replace(/ /g, "_")}`}
+      to={`/category/${slug}`}
       state={{
         title,
         banner,
@@ -64,6 +65,7 @@ const ServicesWidget = () => {
                 <ServiceItem
                   key={index}
                   title={category?.name}
+                  slug={category?.slug}
                   icon={category?.image}
                   id={category?.id}
                   banner={category?.banner}

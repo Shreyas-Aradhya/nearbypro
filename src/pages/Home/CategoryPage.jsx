@@ -10,13 +10,13 @@ import TwoColumnAbout from "../../sections/HomePage/TwoColumnAbout/TwoColumnAbou
 import SubCategoriesWidget from "../../sections/HomePage/ServicesWidget/SubCategoriesWidget";
 
 import getCategories from "../../services/getCategories";
-import getCategoryById from "../../services/getCategoryById";
+import getCategoryBySlug from "../../services/getCategoryBySlug";
 
-import { useLocation, useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 
 const CategoryPage = () => {
-  const location = useLocation();
+  const { slug } = useParams();
   const navigate = useNavigate();
 
   const [currCategory, setCurrCategories] = useState({});
@@ -24,23 +24,25 @@ const CategoryPage = () => {
   useEffect(() => {
     const getData = async () => {
       try {
-        const cat = await getCategoryById(location?.state?.id);
+        const cat = await getCategoryBySlug(slug);
         setCurrCategories(cat);
-        const data = await getCategories({ parent: location?.state?.id });
+        const data = await getCategories({ parent: cat?.id });
         setSubCategories(data);
       } catch (error) {
         console.log(error);
+        navigate("/404");
       }
     };
-    if (!location?.state?.id) {
+    if (!slug) {
       navigate("/404");
     }
     getData();
-  }, [location?.state?.id, navigate]);
+  }, [slug, navigate]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
   return (
     <div>
       <Helmet>
